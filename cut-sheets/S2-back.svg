@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- S2 Back. Units: inches, 1:1, sheet 48 x 48. Cut with a 1/4 in downcut bit (see gen_c2d.py). Parts sit 0.5 in apart. -->
+<!-- Layers: outside profiles = Cutout, outside the line, through. inside profiles = Contour inside the line, through. -->
+<!-- holes = 0.5 in, Contour inside the line with the 1/4 in bit, through. dados = Pocket, 0.25 in deep, inside the outline. -->
+<!-- 1 in all round is never cut by a part: hold-down screws go there. Red break lines are on-path through cuts to the edge; cut them LAST with a screw in each leftover. -->
+<svg xmlns="http://www.w3.org/2000/svg" width="48in" height="48in" viewBox="0 0 48 48">
+  <g id="sheet-outline" fill="none" stroke="#999999" stroke-width="0.02">
+    <rect x="0" y="0" width="48" height="48"/>
+  </g>
+  <g id="hold-down-zones-delete-before-cutting" fill="#dddddd" stroke="none">
+    <path fill-rule="evenodd" d="M0 0H48V48H0Z M1 1H47V47H1Z"/>
+  </g>
+  <g id="holes-drill-0.5in-through" fill="none" stroke="#ff00ff" stroke-width="0.01">
+    <circle cx="13.7" cy="31.5" r="0.25"/>
+  </g>
+  <g id="outside-profiles-cutout-through" fill="none" stroke="#000000" stroke-width="0.01">
+    <path d="M1.5 1.5H45.94V45.78H1.5V1.5Z"/>
+  </g>
+  <g id="break-lines-on-path-through-cut-last" fill="none" stroke="#ff0000" stroke-width="0.01">
+    <line x1="46.69" y1="0" x2="46.69" y2="48"/>
+    <line x1="0" y1="46.53" x2="48" y2="46.53"/>
+  </g>
+  <g id="labels-delete-before-cutting" fill="#888888" font-family="Helvetica, Arial, sans-serif" font-size="0.6">
+    <text x="2" y="2.6">BACK  44 7/16 × 44 9/32</text>
+    <text x="24" y="47.7" text-anchor="middle">1 IN HOLD-DOWN BORDER ALL ROUND, SCREWS HERE, NO PARTS</text>
+  </g>
+</svg>

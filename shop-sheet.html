@@ -1,0 +1,745 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mini Kitchen Shop Sheet</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Barlow:wght@400;500;600&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>
+  :root {
+    --paper: #f8f7f3;
+    --paper-2: #efede6;
+    --ink: #1e2422;
+    --ink-2: #5a605c;
+    --rule: #c4c1b7;
+    --chalk: #2456a4;
+    --chalk-soft: #dfe7f5;
+    --birch: #e6cda3;
+    --birch-light: #f1e2c4;
+    --birch-edge: #a8875a;
+    --offcut: #d9d6cc;
+    --offcut-line: #b3afa2;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --paper: #191b1c;
+      --paper-2: #222527;
+      --ink: #e9e7e0;
+      --ink-2: #a3a59e;
+      --rule: #3c4043;
+      --chalk: #86ace8;
+      --chalk-soft: #23304a;
+      --birch: #6a5433;
+      --birch-light: #7d6640;
+      --birch-edge: #c9a978;
+      --offcut: #2c2f31;
+      --offcut-line: #4a4e51;
+    }
+  }
+  :root[data-theme="dark"] {
+    --paper: #191b1c;
+    --paper-2: #222527;
+    --ink: #e9e7e0;
+    --ink-2: #a3a59e;
+    --rule: #3c4043;
+    --chalk: #86ace8;
+    --chalk-soft: #23304a;
+    --birch: #6a5433;
+    --birch-light: #7d6640;
+    --birch-edge: #c9a978;
+    --offcut: #2c2f31;
+    --offcut-line: #4a4e51;
+  }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: "Barlow", "Helvetica Neue", Arial, sans-serif;
+    font-size: 16px;
+    line-height: 1.5;
+    padding-block: 40px 72px;
+    padding-inline: 20px;
+  }
+  .page { max-width: 920px; margin: 0 auto; display: flex; flex-direction: column; gap: 44px; }
+
+  h1, h2, h3 { font-family: "Barlow Condensed", "Arial Narrow", sans-serif; text-wrap: balance; margin: 0; line-height: 1.05; }
+  h1 { font-size: 26px; font-weight: 600; }
+  .cover h1 { font-size: 40px; font-weight: 700; letter-spacing: -0.01em; }
+  h2 { font-size: 26px; font-weight: 600; }
+  h3 { font-size: 19px; font-weight: 600; }
+  .eyebrow { font-family: "Barlow Condensed", sans-serif; font-weight: 600; font-size: 13px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--chalk); }
+  .mono { font-family: "JetBrains Mono", "SFMono-Regular", Menlo, monospace; font-variant-numeric: tabular-nums; }
+  p { margin: 0; max-width: 62ch; }
+  .muted { color: var(--ink-2); }
+
+  .cover { display: flex; flex-direction: column; gap: 22px; }
+  .cover-img { width: 100%; height: auto; display: block; border-radius: 4px; }
+  .cover-text { display: flex; flex-direction: column; gap: 12px; }
+  .cover-sub { max-width: 70ch; font-size: 17px; }
+  header { display: flex; flex-direction: column; gap: 14px; border-bottom: 2px solid var(--ink); padding-bottom: 22px; }
+  .features { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+  .feature { display: flex; flex-direction: column; gap: 6px; padding: 14px 14px 12px; background: var(--paper-2); border-radius: 6px; }
+  .feature svg { width: 36px; height: 36px; stroke: var(--chalk); fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; margin-bottom: 4px; }
+  .feature b { font-family: "Barlow Condensed", sans-serif; font-weight: 600; font-size: 18px; line-height: 1.1; }
+  .feature span { font-size: 13px; line-height: 1.4; color: var(--ink-2); }
+  .spec { display: flex; flex-wrap: wrap; gap: 8px 28px; font-size: 15px; }
+  .spec span { display: inline-flex; gap: 8px; align-items: baseline; }
+  .spec b { font-family: "JetBrains Mono", monospace; font-weight: 600; font-variant-numeric: tabular-nums; }
+
+  section { display: flex; flex-direction: column; gap: 16px; }
+  .section-head { display: flex; flex-direction: column; gap: 4px; }
+
+  .tablewrap { overflow-x: auto; }
+  table { border-collapse: collapse; width: 100%; min-width: 620px; font-size: 15px; }
+  th, td { text-align: left; padding: 9px 12px; border-bottom: 1px solid var(--rule); vertical-align: top; }
+  th { font-family: "Barlow Condensed", sans-serif; font-size: 13px; letter-spacing: 0.1em; text-transform: uppercase; font-weight: 600; color: var(--ink-2); border-bottom: 2px solid var(--ink); }
+  td.num, th.num { text-align: right; font-family: "JetBrains Mono", monospace; font-variant-numeric: tabular-nums; white-space: nowrap; }
+  td .dec { display: block; font-size: 12px; color: var(--ink-2); }
+  tr.total td { border-bottom: none; border-top: 2px solid var(--ink); font-weight: 600; }
+  .sheet-tag { display: inline-block; font-family: "JetBrains Mono", monospace; font-size: 12px; font-weight: 600; padding: 1px 7px; border-radius: 3px; background: var(--chalk-soft); color: var(--chalk); }
+
+  .sheets { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 22px; }
+  .sheet { display: flex; flex-direction: column; gap: 8px; }
+  .sheet-head { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; }
+  .sheet-head h3 span { color: var(--ink-2); font-weight: 500; }
+  .sheet svg { width: 100%; height: auto; display: block; max-width: 100%; }
+  .sheet .note { font-size: 13.5px; color: var(--ink-2); }
+
+  svg .ply { fill: var(--birch); stroke: var(--birch-edge); stroke-width: 0.25; }
+  svg .off { fill: var(--offcut); stroke: var(--offcut-line); stroke-width: 0.2; stroke-dasharray: 0.8 0.6; }
+  svg .board { fill: none; stroke: var(--ink); stroke-width: 0.35; }
+  svg text { font-family: "Barlow Condensed", sans-serif; font-weight: 600; fill: var(--ink); font-size: 2.3px; }
+  svg text.dim { font-family: "JetBrains Mono", monospace; font-weight: 400; font-size: 1.9px; fill: var(--ink-2); }
+  svg text.offlabel { font-size: 1.9px; fill: var(--ink-2); font-weight: 500; }
+  svg .grain { stroke: var(--birch-edge); stroke-width: 0.12; opacity: 0.55; }
+  svg .groove { stroke: var(--ink); stroke-width: 0.14; opacity: 0.5; }
+  svg .hole { fill: var(--offcut); stroke: var(--ink); stroke-width: 0.2; }
+  svg .keep { fill: var(--ink); opacity: 0.09; }
+  svg .brk { stroke: #c0392b; stroke-width: 0.3; stroke-dasharray: 1.4 0.9; }
+
+  .callouts { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; }
+  .callout { background: var(--paper-2); padding: 16px 18px; display: flex; flex-direction: column; gap: 6px; }
+  .callout .big { font-family: "Barlow Condensed", sans-serif; font-size: 40px; font-weight: 700; line-height: 1; font-variant-numeric: tabular-nums; }
+  .callout .big small { font-size: 16px; font-weight: 500; color: var(--ink-2); margin-left: 4px; }
+
+  ul.notes { margin: 0; padding-left: 20px; display: flex; flex-direction: column; gap: 8px; max-width: 70ch; }
+  ul.notes li b { font-weight: 600; }
+  ol.steps { margin: 0; padding-left: 0; list-style: none; counter-reset: step; display: flex; flex-direction: column; gap: 14px; max-width: 72ch; }
+  ol.steps li { counter-increment: step; position: relative; padding-left: 56px; }
+  ol.steps li::before { content: counter(step, decimal-leading-zero); position: absolute; left: 0; top: 0; width: 44px; font-family: "Barlow Condensed", sans-serif; font-weight: 700; font-size: 26px; line-height: 1; color: var(--chalk); padding-top: 2px; font-variant-numeric: tabular-nums; }
+  ol.steps li b { display: block; font-family: "Barlow Condensed", sans-serif; font-weight: 600; font-size: 18px; margin-bottom: 2px; }
+  ol.steps li p { margin: 0; max-width: none; }
+  ol.steps li p + p { margin-top: 6px; }
+  figure.fig { margin: 12px 0 0; }
+  figure.fig svg { width: 100%; height: auto; display: block; max-width: 100%; }
+  figure.fig figcaption { font-size: 13.5px; color: var(--ink-2); margin-top: 6px; max-width: 70ch; }
+  .fig-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 14px; margin-top: 12px; }
+  .fig-grid figure.fig { margin: 0; }
+  svg .f-front { fill: var(--birch); stroke: var(--ink); stroke-width: 0.18; stroke-linejoin: round; }
+  svg .f-top { fill: var(--birch-light); stroke: var(--ink); stroke-width: 0.18; stroke-linejoin: round; }
+  svg .f-ghost { fill-opacity: 0.3; }
+  svg .f-side { fill: var(--birch-edge); stroke: var(--ink); stroke-width: 0.18; stroke-linejoin: round; }
+  figure.fig svg text.lbl { font-family: "Barlow Condensed", sans-serif; font-weight: 600; font-size: 1.5px; fill: var(--ink); paint-order: stroke; stroke: var(--paper); stroke-width: 0.5px; }
+  figure.fig svg text.lbl-v { font-family: "Barlow Condensed", sans-serif; font-weight: 600; font-size: 1.3px; fill: var(--ink); writing-mode: vertical-rl; text-anchor: middle; paint-order: stroke; stroke: var(--paper); stroke-width: 0.5px; }
+  figure.fig svg text.dim { font-family: "JetBrains Mono", monospace; font-size: 0.95px; fill: var(--ink-2); }
+  svg .dimln { stroke: var(--ink-2); stroke-width: 0.08; stroke-dasharray: 0.4 0.3; }
+  svg .foot { fill: none; stroke: var(--ink-2); stroke-width: 0.1; stroke-dasharray: 0.5 0.35; }
+  svg .dowel { fill: var(--chalk); stroke: none; }
+  svg .screw { stroke: var(--ink); stroke-width: 0.16; }
+  svg .cup { fill: var(--chalk-soft); stroke: var(--chalk); stroke-width: 0.12; }
+  svg .sys { fill: var(--chalk); }
+  svg .arrow { stroke: var(--chalk); stroke-width: 0.45; marker-end: url(#arrowhead); }
+  svg .brace { fill: none; stroke: var(--chalk); stroke-width: 0.9; stroke-linecap: round; }
+  svg .dowel-bar { fill: var(--chalk); stroke: none; }
+  svg .screwg { stroke: var(--ink); stroke-width: 0.28; stroke-linecap: round; }
+  svg .jig, svg .f-front.jig, svg .f-top.jig, svg .f-side.jig { fill: var(--chalk-soft); stroke: var(--chalk); }
+  svg .jigp { fill: var(--chalk-soft); fill-opacity: 0.75; stroke: var(--chalk); stroke-width: 0.12; }
+  svg .lip { stroke: var(--chalk); stroke-width: 0.45; stroke-linecap: square; }
+  svg .bore { fill: var(--paper); stroke: var(--ink); stroke-width: 0.1; }
+  svg .pinm { fill: var(--chalk); stroke: var(--ink); stroke-width: 0.08; }
+  svg .pencil { stroke: var(--ink-2); stroke-width: 0.08; stroke-dasharray: 0.6 0.4; }
+  svg .window { fill: var(--paper); stroke: var(--chalk); stroke-width: 0.08; }
+  svg .opening { fill: var(--offcut); stroke: none; }
+  svg .spacer { fill: var(--chalk); stroke: none; }
+  svg .bit { fill: var(--ink-2); stroke: none; }
+  svg .collar { fill: var(--ink); stroke: none; }
+  td.box, th.box { width: 34px; padding-left: 4px; padding-right: 4px; white-space: nowrap; font-size: 11px; letter-spacing: 0.06em; }
+  .cnt { font-family: "JetBrains Mono", monospace; font-size: 10.5px; color: var(--ink-2); margin-left: 4px; vertical-align: 1px; }
+  .cb { display: inline-block; width: 13px; height: 13px; border: 1.5px solid var(--ink); border-radius: 2px; vertical-align: -1px; }
+  .dec-inline { display: block; font-size: 11px; color: var(--ink-2); font-weight: 400; }
+  .unit-check table { min-width: 560px; }
+  svg .edge { fill: var(--offcut); stroke: var(--offcut-line); stroke-width: 0.08; }
+  svg .hole-dowel { fill: var(--chalk); stroke: none; }
+  svg .hole-screw { fill: var(--ink); stroke: none; }
+  svg .hole-pilot { fill: var(--ink-2); stroke: none; }
+  svg .hole-cable { fill: var(--paper); stroke: var(--ink); stroke-width: 0.1; }
+  svg .hole-cup { fill: var(--chalk-soft); stroke: var(--chalk); stroke-width: 0.1; }
+  svg .hole-foot { fill: none; stroke: var(--ink); stroke-width: 0.08; stroke-dasharray: 0.35 0.25; }
+  svg .extln { stroke: var(--ink-2); stroke-width: 0.05; }
+  #holemap svg .ah { fill: var(--ink); stroke: none; }
+  #holemap svg .dimln { stroke: var(--ink); stroke-width: 0.06; stroke-dasharray: none; }
+  #holemap svg text.dim { fill: var(--ink); font-family: "JetBrains Mono", monospace; }
+  #holemap svg text.dimsm { fill: var(--ink-2); font-family: "JetBrains Mono", monospace; }
+  .part-block { display: flex; flex-direction: column; gap: 10px; margin-top: 22px; }
+  .part-block h3 { font-size: 20px; }
+  a { color: var(--chalk); text-decoration-thickness: 1px; text-underline-offset: 2px; }
+  a:focus-visible { outline: 2px solid var(--chalk); outline-offset: 2px; }
+
+  @page { size: letter; margin: 0.6in 0.6in 0.7in; }
+  @media print {
+    :root, :root[data-theme="dark"], :root:not([data-theme="light"]) {
+      --paper: #ffffff; --paper-2: #f1efe9; --ink: #1e2422; --ink-2: #4c524e; --rule: #b9b6ad;
+      --chalk: #1f4d94; --chalk-soft: #dfe7f5; --birch: #e6cda3; --birch-light: #f1e2c4; --birch-edge: #a8875a;
+      --offcut: #d9d6cc; --offcut-line: #b3afa2;
+    }
+    /* Flex and grid containers suppress fragmentation in every engine, so everything that must break becomes a block. */
+    .page, section, .section-head, header, .cover, .cover-text, .sheet, ol.steps, .callouts, .sheets, .fig-grid, .part-block { display: block; }
+    .part-block { break-before: page; page-break-before: always; break-inside: avoid; page-break-inside: avoid; }
+    #holemap .section-head + .part-block { break-before: auto; }
+    #holemap figure.fig svg { max-height: 4.9in; }
+    #holemap table { font-size: 10px; }
+    #holemap td, #holemap th { padding: 5px 8px; }
+    .part-block h3 { break-after: avoid; }
+    .page { max-width: none; }
+    p, figure.fig figcaption, .cover-sub, .section-head p { max-width: none; }
+    body { padding-block: 0; padding-inline: 0; font-size: 11.5px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    header { break-before: page; page-break-before: always; margin-bottom: 18px; }
+    .section-head { margin-bottom: 10px; }
+    .section-head p { margin-top: 4px; }
+    section { break-before: page; page-break-before: always; margin: 0; }
+    section.no-break, header + section { break-before: auto; page-break-before: auto; margin-top: 30px; }
+    header + section { margin-top: 0; }
+    .cover { break-before: auto; page-break-before: auto; break-after: page; page-break-after: always; }
+    .cover-img { max-height: 4in; width: auto; max-width: 100%; margin: 0 auto 14px; border-radius: 0; }
+    .features { display: grid !important; grid-template-columns: repeat(4, 1fr); gap: 10px; break-inside: avoid; page-break-inside: avoid; }
+    .feature { display: block; padding: 10px 10px 8px; break-inside: avoid; page-break-inside: avoid; }
+    .feature svg { width: 28px; height: 28px; display: block; margin-bottom: 4px; }
+    .feature b { display: block; font-size: 15px; margin-bottom: 3px; }
+    .feature span { font-size: 10.5px; line-height: 1.35; }
+    .cover-sub { font-size: 14px; }
+    .cover-text > * + * { margin-top: 10px; }
+    .cover h1 { font-size: 34px; }
+    h2, h3, .section-head { break-after: avoid; page-break-after: avoid; }
+    .section-head + * { break-before: avoid; }
+    table { font-size: 11px; min-width: 0; width: 100%; margin-bottom: 12px; }
+    tr, .callout, .unit-check, .tablewrap, figure.fig, .sheet { break-inside: avoid; page-break-inside: avoid; }
+    figure.fig img, figure.fig svg, .sheet svg { break-inside: avoid; page-break-inside: avoid; display: block; }
+    figure.fig figcaption { break-before: avoid; page-break-before: avoid; }
+    figure.fig { margin: 10px 0 14px; }
+    figure.fig svg { max-height: 8in; }
+    .sheets::after, .fig-grid::after, .callouts::after { content: ""; display: block; clear: both; }
+    .sheet { float: left; width: 31%; margin: 0 2% 14px 0; }
+    .sheet:nth-child(3n) { margin-right: 0; }
+    header + section table { font-size: 10.5px; }
+    header + section td, header + section th { padding: 5px 8px; }
+    .fig-grid figure.fig { float: left; width: 48%; margin: 0 4% 14px 0; }
+    .fig-grid figure.fig:nth-child(2n) { margin-right: 0; }
+    .callout { float: left; width: 47%; margin: 0 3% 12px 0; }
+    .callout:nth-child(2n) { margin-right: 0; }
+    ol.steps { max-width: none; column-count: 2; column-gap: 28px; }
+    ol.steps li { margin-bottom: 14px; break-inside: avoid; page-break-inside: avoid; }
+    ol.steps li b { break-after: avoid; }
+    ul.notes { display: block; max-width: none; column-count: 2; column-gap: 28px; }
+    ul.notes li { margin-bottom: 8px; break-inside: avoid; page-break-inside: avoid; }
+    a { color: inherit; text-decoration: none; }
+    .sheet-head a::after { content: ""; }
+  }
+</style>
+
+<style>
+  figure.fig img { width: 100%; height: auto; display: block; border-radius: 3px; }
+  .callouts { grid-template-columns: repeat(3, 1fr); align-items: stretch; }
+  @media (max-width: 720px) { .callouts { grid-template-columns: repeat(2, 1fr); } }
+  .fig-grid img { width: 100%; height: auto; display: block; }
+  .part-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 10px; }
+  #budget tr.cat td { font-family: "Barlow Condensed", sans-serif; font-weight: 600; font-size: 1.08em; letter-spacing: 0.02em; background: var(--paper-2); color: var(--ink); padding-top: 5px; padding-bottom: 3px; }
+  .part-grid figure { margin: 0; background: var(--paper-2); border-radius: 6px; padding: 6px 6px 8px; }
+  .part-grid img { width: 100%; height: auto; display: block; border-radius: 4px; }
+  .part-grid figcaption { font-family: "Barlow Condensed", sans-serif; font-weight: 600; font-size: 14px; text-align: center; margin-top: 4px; }
+  @media print { figure.fig img { max-height: 4.6in; width: auto; max-width: 100%; margin: 0 auto; } #budget .tablewrap { break-inside: auto; } #budget table { font-size: 6.9px; } #budget td, #budget th { padding: 0 4px; } #budget td .dec { font-size: 5.9px; line-height: 1.15; } table.toolpaths { font-size: 8px; margin-bottom: 3px; } section.no-break ul.notes { font-size: 8.2px; line-height: 1.3; } section.no-break ul.notes li { margin-bottom: 2px; } table.toolpaths td, table.toolpaths th { padding: 2px 5px; line-height: 1.25; } table.toolpaths td .dec { display: inline; margin-left: 3px; font-size: 1em !important; color: var(--ink-2, #5a605c); } .toolpath-foot { font-size: 8.4px; margin: 2px 0 8px; max-width: none; } #budget tr.cat td { font-size: 7.6px; padding-top: 1px; padding-bottom: 0; line-height: 1.15; } #budget td { line-height: 1.12; } #budget .section-head { margin-bottom: 4px; } #assembly .tablewrap { break-inside: auto; } #assembly table { font-size: 9.5px; } #assembly td, #assembly th { padding: 3px 6px; } #assembly figure.fig img { max-height: 3.4in; } #printed figure.fig img { max-height: 2.8in; } ul.notes { font-size: 9.2px; line-height: 1.38; } ul.notes li { margin-bottom: 3px; } #checklist .tablewrap, header + section .tablewrap, #printed .tablewrap { break-inside: auto; } #checklist table, #printed table { font-size: 8.8px; } #checklist td, #checklist th, #printed td, #printed th { padding: 2px 6px; } #checklist td.box:nth-child(2) { font-size: 8px; } #finish table { font-size: 9.5px; } #finish td, #finish th { padding: 3px 6px; } #finish ol.steps { font-size: 10.5px; } #finish ol.steps li { margin-bottom: 8px; } #assembly ol.steps { font-size: 9.3px; line-height: 1.36; column-gap: 22px; } #assembly ol.steps li { margin-bottom: 5px; } #assembly ol.steps li b { font-size: 13.5px; } #assembly figure.fig img { max-height: 7.6in; } #assembly figure.fig:not(.float-fig) { break-before: page; page-break-before: always; } figure.float-fig, figure.wiring-fig { break-before: page; page-break-before: always; } figure.wiring-fig img { max-height: 6.4in !important; width: auto; } #assembly figure.plumb-fig { break-before: auto !important; page-break-before: auto !important; margin-top: 18px; } figure.plumb-fig img { max-height: 4.6in !important; width: auto; } figure.box-fig img { width: 7in !important; height: auto !important; max-height: none !important; max-width: 100% !important; margin: 0 auto; } figure.float-fig img { max-height: 6.4in !important; width: auto; } #inside figure.fig img { max-height: 6.2in; } .part-grid { display: grid !important; grid-template-columns: repeat(5, 1fr); gap: 8px; } .part-grid figure { break-inside: avoid; page-break-inside: avoid; padding: 4px 4px 6px; } .part-grid figcaption { font-size: 12px; } #inside figcaption { font-size: 11px; } .cover-img { max-height: 3.5in !important; } .feature span { font-size: 9.8px !important; } .cover h1 { font-size: 30px !important; } header + section table { font-size: 8.8px; } header + section td, header + section th { padding: 2px 6px; } header + section td .dec { font-size: 7.8px; } header { padding-bottom: 12px; } header .spec { font-size: 12px; } .callouts { display: grid !important; grid-template-columns: repeat(6, 1fr); gap: 8px; break-inside: avoid; } .callout { float: none !important; width: auto !important; margin: 0 !important; padding: 10px 10px 8px; } .callout .big { font-size: 26px; } .callout .big small { font-size: 11px; } .callout .muted { font-size: 8.5px; line-height: 1.3; } .callout .eyebrow { font-size: 10px; } .sheets .sheet { width: 23.5%; margin-right: 2%; margin-bottom: 8px; } .sheets .sheet:nth-child(4n) { margin-right: 0; } .sheet .note { font-size: 8.5px; } .sheet-head h3 { font-size: 12px; } .sheet-head a { font-size: 7.5px; } .sheets { break-inside: avoid; page-break-inside: avoid; } }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <section class="cover">
+    <img class="cover-img" src="cover.jpg" alt="Render of the finished play kitchen: an oak plywood hutch with four open oak compartments up top, five pastel-blue lower doors including an oven door with a window and a bar handle, a stainless bar sink with a brushed-nickel faucet, a dish rack with plates and four coil burners with knobs">
+    <div class="cover-text">
+      <h1>Mini Kitchen</h1>
+      <p class="cover-sub">A three-bay hutch for a two-year-old, in real oak plywood with open shelves up top and pale blue doors below, with a sink that really runs and a port she refills herself.</p>
+      <div class="features">
+        <div class="feature"><svg viewBox="0 0 48 48"><path d="M8 22h32l-3 14H11z"/><path d="M24 22V12a6 6 0 0 1 12 0v2"/><path d="M33 16v4"/><circle cx="24" cy="30" r="1.6"/></svg><b>Water that really runs</b><span>A real stainless sink and a real faucet: turn the handle and water comes out, like the big kitchen.</span></div>
+        <div class="feature"><svg viewBox="0 0 48 48"><path d="M8 14h12v24H8z"/><path d="M28 14h12v24H28z"/><path d="M14 10v4M34 10v4"/><path d="M20 20h8"/><path d="M26 18l2 2-2 2"/></svg><b>Clean jug in, dirty jug out</b><span>A quiet pump drinks from a clean jug under the sink; the sink drains into a dirty one. She refills the clean jug herself through a lidded port with her own pitcher, and the pump stops itself when the clean jug is empty or the dirty one is full.</span></div>
+        <div class="feature"><svg viewBox="0 0 48 48"><rect x="8" y="10" width="32" height="28"/><rect x="14" y="20" width="20" height="12"/><path d="M14 15h20"/><circle cx="16" cy="6" r="2.5"/><circle cx="32" cy="6" r="2.5"/></svg><b>An oven with a window</b><span>Side-opening door with a real acrylic window, a steel bar handle and a wire rack inside; four coil burners and four knobs that turn. Nothing ever heats up.</span></div>
+        <div class="feature"><svg viewBox="0 0 48 48"><rect x="8" y="10" width="32" height="10" rx="1"/><rect x="8" y="24" width="32" height="14" rx="1"/><circle cx="24" cy="15" r="1.6"/><path d="M20 31h8"/></svg><b>A warming drawer</b><span>A second little door under the oven for the pans and the pretend leftovers.</span></div>
+        <div class="feature"><svg viewBox="0 0 48 48"><path d="M6 34h36v6H6z"/><path d="M12 34V16M20 34V16M28 34V16M36 34V16"/><circle cx="16" cy="22" r="7"/></svg><b>Dishes to wash and dry</b><span>Plates, a frying pan, a spatula and three canisters, with a dish rack beside the sink.</span></div>
+        <div class="feature"><svg viewBox="0 0 48 48"><rect x="8" y="6" width="32" height="36"/><path d="M8 20h32"/><path d="M24 6v14M24 20v22"/><circle cx="20" cy="13" r="1.6"/><circle cx="28" cy="13" r="1.6"/><circle cx="20" cy="31" r="1.6"/><circle cx="28" cy="31" r="1.6"/></svg><b>Her dishes where she can see them</b><span>Four open compartments up top at her eye level, so she can choose and put back without help. Everything else stays behind five doors.</span></div>
+        <div class="feature"><svg viewBox="0 0 48 48"><rect x="6" y="10" width="36" height="28" rx="2"/><path d="M10 18c8-4 16 4 24 0M10 26c8-4 16 4 24 0M10 34c8-4 16 4 24 0"/><path d="M40 6l3 5a3.2 3.2 0 1 1-6 0z"/></svg><b>Oak and pale blue</b><span>Natural oak everywhere and pastel-blue Shaker doors, sealed so splashes wipe off.</span></div>
+        <div class="feature"><svg viewBox="0 0 48 48"><rect x="6" y="14" width="22" height="28"/><path d="M28 18l12-6"/><path d="M40 6v36"/><path d="M6 42h34"/></svg><b>Built for a two-year-old who is growing</b><span>Counter at 23 in, shelves she can reach, two pegs for her apron and towel; rounded corners, a 12 V pump, and a strap to the wall so it cannot tip.</span></div>
+      </div>
+      <div class="spec">
+        <span>Size <b>45 7/8 W × 18 D × 45 H in</b></span>
+        <span>Counter <b>23 in</b></span>
+      </div>
+    </div>
+  </section>
+
+  <section id="inside">
+    <div class="section-head"><h2>Inside</h2></div>
+    <figure class="fig"><img src="doors-open.jpg" alt="Render of the kitchen with every door open: four open compartments up top, the two water jugs and the pump under the sink, the drying cupboard shelf, the oak oven with its wire rack and the warming drawer"><figcaption>Every door open. Up top, four open compartments for her dishes. Under the sink the clean jug (left) feeds the pump on the back wall and the dirty jug (right) stands on the floor under the strainer; the oven is plain oak inside with a wire rack; the warming drawer and the drying cupboard are plain shelves behind doors. Rendered from the model with the doors swung on their hinges.</figcaption></figure>
+  </section>
+
+  <section id="budget">
+    <div class="section-head">
+      <h2>Budget</h2>
+    </div>
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th class="box">Bought</th><th>Item</th><th>Where</th><th class="num">Each</th><th class="num">Qty</th><th class="num">Subtotal</th></tr></thead>
+        <tbody>
+          <tr class="cat"><td></td><td colspan="4">Wood and finish</td><td class="num">351.83</td></tr>
+          <tr><td class="box"><span class="cb">✓</span></td><td><a href="https://www.homedepot.com/p/Columbia-Forest-Products-3-4-in-x-4-ft-x-8-ft-PureBond-Red-Oak-Plywood-165956/100046409">PureBond red oak plywood 3/4 in × 4 ft × 8 ft</a><span class="dec">Columbia Forest Products 165956. Three sheets ripped in half make the six 48 × 48 panels on hand; the cut sheets use five. Measured 0.715 to 0.725 in; dados cut 0.735. Budget price, not read from the page.</span></td><td>Home Depot</td><td class="num">95.00</td><td class="num">3</td><td class="num">285.00</td></tr>
+          <tr><td class="box"><span class="cb">✓</span></td><td><a href="https://www.amazon.com/dp/B0G43Y98DV">Red oak iron-on edge banding, 13/16 in × 50 ft</a><span class="dec">POWERTEC 72371, pre-glued (the Edge Supply roll went out of stock). About 44 ft used: every front edge of the carcass, the open shelves included, and all four edges of five doors.</span></td><td>Amazon</td><td class="num">20.00</td><td class="num">1</td><td class="num">20.00</td></tr>
+          <tr><td class="box"><span class="cb">✓</span></td><td><a href="https://www.homedepot.com/p/Titebond-III-8-oz-Ultimate-Wood-Glue-1413/202960636">Titebond III wood glue, 8 oz</a><span class="dec">Titebond 1413. Waterproof. Every dado gets it.</span></td><td>Home Depot</td><td class="num">7.49</td><td class="num">1</td><td class="num">7.49</td></tr>
+          <tr><td class="box"><span class="cb">✓</span></td><td><a href="https://www.homedepot.com/p/BEHR-PREMIUM-1-qt-52-White-Semi-Gloss-Enamel-Interior-Exterior-Cabinet-Door-Trim-Paint-712004/312376157">BEHR Premium cabinet &amp; trim enamel, semi-gloss, 1 qt, light blue</a><span class="dec">The five doors, in a very pale powder blue: pick a light blue at the paint desk and ask for it three steps lighter. Budget price.</span></td><td>Home Depot</td><td class="num">23.38</td><td class="num">1</td><td class="num">23.38</td></tr>
+          <tr><td class="box"><span class="cb">✓</span></td><td><a href="https://www.homedepot.com/p/KILZ-KILZ-2-ALL-PURPOSE-1-qt-White-Interior-Exterior-Multi-Surface-Primer-Sealer-and-Stain-Blocker-20902/100144601">KILZ 2 primer, 1 qt</a><span class="dec">KILZ 20902. One coat on the five doors before the enamel; plywood drinks paint.</span></td><td>Home Depot</td><td class="num">12.98</td><td class="num">1</td><td class="num">12.98</td></tr>
+          <tr><td class="box"><span class="cb">✓</span></td><td><a href="https://www.homedepot.com/p/Waddell-1-2-in-x-36-in-Oak-Round-Dowel-6512U/100033232">1/2 in × 36 in oak dowel</a><span class="dec">Two 3 in pegs cut from it, glued through the left side at her shoulder height: apron and hand towel. Budget price.</span></td><td>Home Depot</td><td class="num">2.98</td><td class="num">1</td><td class="num">2.98</td></tr>
+          <tr class="cat"><td></td><td colspan="4">Fasteners</td><td class="num">30.82</td></tr>
+          <tr><td class="box"><span class="cb">✓</span></td><td><a href="https://www.homedepot.com/p/Everbilt-8-x-1-1-4-in-Phillips-Flat-Head-Zinc-Plated-Wood-Screw-100-Pack-801832/204275496">#8 × 1-1/4 in flat head wood screws, 100</a><span class="dec">Everbilt 801832, zinc. About 89 used: three screws through every dado joint on top of the glue, plus the back, shelves and one through each burner. Countersink them all.</span></td><td>Home Depot</td><td class="num">7.97</td><td class="num">1</td><td class="num">7.97</td></tr>
+          <tr><td class="box"><span class="cb">✓</span></td><td><a href="https://www.amazon.com/dp/B06ZZBG6DC">#6 × 1/2 in flat head wood screws, 100</a><span class="dec">Rok Hardware, zinc. Four hold the oven window clips, four the pump's feet, four the wiring box to the back panel and four its lid.</span></td><td>Amazon</td><td class="num">7.09</td><td class="num">1</td><td class="num">7.09</td></tr>
+          <tr><td class="box"><span class="cb">✓</span></td><td><a href="https://www.amazon.com/dp/B00U0XFVEM">3/8 in face-grain oak plugs, 100</a><span class="dec">WidgetCo. Flat plugs for the countersunk heads on the two outside faces and the top, about 36 used.</span></td><td>Amazon</td><td class="num">15.76</td><td class="num">1</td><td class="num">15.76</td></tr>
+          <tr class="cat"><td></td><td colspan="4">Doors and hardware</td><td class="num">23.65</td></tr>
+          <tr><td class="box"><span class="cb">✓</span></td><td><a href="https://www.amazon.com/dp/B097QT8DF9">2-1/2 in stainless butt hinges, 10-pack</a><span class="dec">Zorveiio, satin nickel, 66 × 38 mm, 1.4 mm leaves, screws included. Two on each of the five doors. The cabinet leaf sits flush in a 1.4 mm CNC recess, so the door leaf alone takes up the 3/32 in reveal.</span></td><td>Amazon</td><td class="num">7.49</td><td class="num">1</td><td class="num">7.49</td></tr>
+          <tr><td class="box"><span class="cb">✓</span></td><td><a href="https://www.amazon.com/dp/B0CJQ4HFDR">1.3 in unfinished wood knobs, 20-pack</a><span class="dec">Cangder mushroom knobs, solid wood, M4 × 30 mm screws included. Four on the doors, each on a printed bushing in a 1/2 in CNC hole and centred on the stile, clear of the Shaker panel; one on the fill-port lid. Fifteen spare. The stove knobs are printed.</span></td><td>Amazon</td><td class="num">9.99</td><td class="num">1</td><td class="num">9.99</td></tr>
+          <tr><td class="box"><span class="cb">✓</span></td><td><a href="https://www.amazon.com/dp/B01A7D4LIG">6 in stainless bar pull, 96 mm centres</a><span class="dec">Pandora solid stainless. The oven door handle, above the window; the CNC dimples its two screw holes on the inside face.</span></td><td>Amazon</td><td class="num">6.17</td><td class="num">1</td><td class="num">6.17</td></tr>
+          <tr class="cat"><td></td><td colspan="4">Sink and faucet</td><td class="num">155.72</td></tr>
+          <tr><td class="box"><span class="cb">✓</span></td><td><a href="https://www.amazon.com/dp/B001289TIS">Elkay Dayton 15 in drop-in bar sink</a><span class="dec">D115151. 15 × 15 rim, 12 × 10 × 5 bowl, 2 in drain, one 1 1/2 in faucet hole, 14 3/8 in cutout, clips included. The 5 in bowl leaves room for a 14 in jug under it. It sits 3/4 in back of centre in its bay so the drain lands over the dirty jug's neck.</span></td><td>Amazon</td><td class="num">74.99</td><td class="num">1</td><td class="num">74.99</td></tr>
+          <tr><td class="box"><span class="cb">✓</span></td><td><a href="https://www.amazon.com/dp/B0D7PXX12L">ARCORA single-handle bar faucet, brushed nickel, with supply lines</a><span class="dec">9.3 in tall under 10 1/2 in of headroom, spout 7 in up, 5 in reach, 1.26 to 1.5 in hole. Hoses end in 1/2-14 NPSM nuts for the adapters below; if yours are 3/8 compression, use 3/8 compression × 3/8 barb fittings (B07DJ451LM) instead.</span></td><td>Amazon</td><td class="num">43.19</td><td class="num">1</td><td class="num">43.19</td></tr>
+          <tr><td class="box"><span class="cb">✓</span></td><td><a href="https://www.amazon.com/dp/B0096C2IVC">Niagara Tri-Max 0.5 / 1.0 / 1.5 GPM aerator</a><span class="dec">Niagara Conservation N3610CH, dual thread, three click-stop flows. Run it on 0.5 so the sink never fills faster than it drains. Play water, not drinking water.</span></td><td>Amazon</td><td class="num">8.50</td><td class="num">1</td><td class="num">8.50</td></tr>
+          <tr><td class="box"><span class="cb">✓</span></td><td><a href="https://www.amazon.com/dp/B0G1BCT47B">2 in bar sink drain with basket strainer</a><span class="dec">Phivan, stainless, fits the Elkay's 2 in drain. Hangs about 1 1/2 in under the bowl, straight over the funnel in the dirty jug. Keeney K5421 (B002JFUOBY) is the fallback.</span></td><td>Amazon</td><td class="num">9.99</td><td class="num">1</td><td class="num">9.99</td></tr>
+          <tr><td class="box"><span class="cb">✓</span></td><td><a href="https://www.amazon.com/dp/B000M2UJSO">1-1/2 in × 6 in sink tailpiece</a><span class="dec">Plumb Pak PP905W. Already in the cart; cut it to a 1 in stub on the strainer to aim the stream into the funnel, or leave it out.</span></td><td>Amazon</td><td class="num">5.99</td><td class="num">1</td><td class="num">5.99</td></tr>
+          <tr><td class="box"><span class="cb">✓</span></td><td><a href="https://www.amazon.com/dp/B006E356S8">Plumber's putty, 9 oz</a><span class="dec">Oatey 31177. Under the strainer flange.</span></td><td>Amazon</td><td class="num">4.54</td><td class="num">1</td><td class="num">4.54</td></tr>
+          <tr><td class="box"><span class="cb">✓</span></td><td><a href="https://www.amazon.com/dp/B000PSE46S">GE Advanced Silicone 2 kitchen &amp; bath sealant, clear, 2.8 oz</a><span class="dec">Bead under the sink rim and around the cutout edge; a thin bead round the acrylic in its pocket.</span></td><td>Amazon</td><td class="num">8.52</td><td class="num">1</td><td class="num">8.52</td></tr>
+          <tr class="cat"><td></td><td colspan="4">Water</td><td class="num">101.73</td></tr>
+          <tr><td class="box"><span class="cb">✓</span></td><td>Two 5 gal square water jugs, 10 × 10 × 14 in<span class="dec">Yours, 2 1/4 in opening at the back edge of the top, both standing neck to the back. Clean on the left: pickup foot inside on its tube through a drilled cap, a side-mount float low on its back wall. Dirty on the right, on the floor in the notch, printed funnel in a 1 1/2 in hole in its cap. Already yours; no price to count.</span></td><td>On hand</td><td class="num">—</td><td class="num">2</td><td class="num">—</td></tr>
+          <tr><td class="box"><span class="cb">✓</span></td><td><a href="https://www.amazon.com/dp/B0BVMDL77Y">ECO-WORTHY 12 V demand pump, 3.5 GPM, 45 psi, with strainer and fittings</a><span class="dec">Model T33-12V. Its pressure switch runs it when the faucet opens and stops it when it closes; self-priming, can run dry. Use its own strainer and 1/2 in straight-thread barbs, not NPT. Screwed to the back panel behind the jugs; switch turned toward 25 psi.</span></td><td>Amazon</td><td class="num">44.99</td><td class="num">1</td><td class="num">44.99</td></tr>
+          <tr><td class="box"><span class="cb">✓</span></td><td><a href="https://www.amazon.com/dp/B0CYSM69DW">1/2 in ID × 5/8 in OD clear vinyl tubing, 10 ft</a><span class="dec">Pickup line from the foot in the clean jug up through its cap to the pump's strainer and inlet; pump outlet to the reducer; and 9 in from the fill port down to the cap. About 7 ft used.</span></td><td>Amazon</td><td class="num">8.99</td><td class="num">1</td><td class="num">8.99</td></tr>
+          <tr><td class="box"><span class="cb">✓</span></td><td><a href="https://www.amazon.com/dp/B088LQCQ4D">1/2 in to 3/8 in stainless barb reducer, 2-pack</a><span class="dec">Beduan 304 stainless: 1/2 in tube from the pump on one end, 3/8 in tube to the tee on the other, a clamp on each. One spare.</span></td><td>Amazon</td><td class="num">10.99</td><td class="num">1</td><td class="num">10.99</td></tr>
+          <tr><td class="box"><span class="cb">✓</span></td><td><a href="https://www.amazon.com/dp/B07NQSNBTG">3/8 in ID × 1/2 in OD clear vinyl tubing, 10 ft</a><span class="dec">Eastman 98620, FDA-compliant PVC. About 3 ft used: reducer to tee to the two faucet adapters.</span></td><td>Amazon</td><td class="num">7.88</td><td class="num">1</td><td class="num">7.88</td></tr>
+          <tr><td class="box"><span class="cb">✓</span></td><td><a href="https://www.amazon.com/dp/B08G1RJ38P">3/8 in stainless barb tee</a><span class="dec">Metaland 3/8 × 3/8 × 3/8. Splits the pump's outlet to both faucet supply lines so every handle position gives water.</span></td><td>Amazon</td><td class="num">8.99</td><td class="num">1</td><td class="num">8.99</td></tr>
+          <tr><td class="box"><span class="cb">✓</span></td><td><a href="https://www.amazon.com/dp/B08G1833GN">3/8 in barb × 1/2 in NPT male nylon adapter, 6-pack</a><span class="dec">JoyTube. Screws straight into the faucet's 1/2-14 NPSM supply nuts (the hose's own cone washer seals it), 3/8 in tube on the barb. One per line, four spare.</span></td><td>Amazon</td><td class="num">7.99</td><td class="num">1</td><td class="num">7.99</td></tr>
+          <tr><td class="box"><span class="cb">✓</span></td><td><a href="https://www.amazon.com/dp/B01MQCU44A">SAE 6 stainless hose clamps (3/8 to 7/8 in), 10-pack</a><span class="dec">Covers both tube sizes; one on every barb, nine used, one spare.</span></td><td>Amazon</td><td class="num">11.90</td><td class="num">1</td><td class="num">11.90</td></tr>
+          <tr class="cat"><td></td><td colspan="4">Electrical</td><td class="num">71.12</td></tr>
+          <tr><td class="box"><span class="cb">✓</span></td><td><a href="https://www.amazon.com/dp/B0D5CKC9V1">12 V 10 A power supply, 120 W, 5.5 × 2.1 mm barrel</a><span class="dec">Desktop supply with a barrel-to-screw-terminal adapter in the box. The pump can pull 6 A. Its plug is the adult off switch.</span></td><td>Amazon</td><td class="num">20.98</td><td class="num">1</td><td class="num">20.98</td></tr>
+          <tr><td class="box"><span class="cb">✓</span></td><td><a href="https://www.amazon.com/dp/B08B4JQHN9">Side-mount float switch, M16, 2-pack</a><span class="dec">mxuteuk DPL-1-BK, polypropylene, both used. One through a 5/8 in hole low on the clean jug's back wall, 2 in up: it opens when the water drops below it and the pump stops before it can run dry. The other high on the dirty jug's back wall, 12 in up, set the other way: it opens when the dirty water lifts it, so the sink cannot overfill the jug. In series on the relay coil; rated 0.5 A, so they never carry the pump.</span></td><td>Amazon</td><td class="num">5.99</td><td class="num">1</td><td class="num">5.99</td></tr>
+          <tr><td class="box"><span class="cb">✓</span></td><td><a href="https://www.amazon.com/dp/B00RWV470O">12 V 30 A automotive relay with socket, 5-pack</a><span class="dec">ESUPPORT 5-pin. Both float switches in series on the coil (85/86), supply positive to 30, pump positive off 87: clean jug empty or dirty jug full, no coil, no pump. Lies in the printed wiring box, held by two zip ties. Four spare.</span></td><td>Amazon</td><td class="num">13.59</td><td class="num">1</td><td class="num">13.59</td></tr>
+          <tr><td class="box"><span class="cb">✓</span></td><td><a href="https://www.amazon.com/dp/B01A6LTK44">2-pin waterproof pigtail plugs, 5 pairs</a><span class="dec">MUYI, pre-wired, 4 in of 18 AWG on each half: no crimping. One pair on each float lead at the top of its jug's back wall, joined to the float wires and to the run to the wiring box with in-line lever connectors. Unplug and the jug walks away. Three pairs spare.</span></td><td>Amazon</td><td class="num">7.59</td><td class="num">1</td><td class="num">7.59</td></tr>
+          <tr><td class="box"><span class="cb">✓</span></td><td><a href="https://www.amazon.com/dp/B0G9NYN463">18 AWG two-conductor red/black wire, 25 ft</a><span class="dec">Copper-clad aluminium, fine at 12 V and these lengths. Three runs into the wiring box: the supply pair from the barrel adapter through the cord hole (2 ft), and one pair to each jug's plug (clean about 3 ft, dirty about 2 ft). Red is the float's feed, black its return.</span></td><td>Amazon</td><td class="num">7.99</td><td class="num">1</td><td class="num">7.99</td></tr>
+          <tr><td class="box"><span class="cb">✓</span></td><td><a href="https://www.amazon.com/dp/B0B28GQVVG">Lever wire connectors, 32-piece kit</a><span class="dec">XALXMAW: 18 one-in-one-out, 6 one-in-two-out, 4, 2 and 2 of the bigger splitters; 24–12 AWG. 14 used: three 1-in-2-out and three 1-in-1-out in the wiring box's labelled slots, and four 1-in-1-out at each jug where the float's leads meet its plug and the plug meets the run. Strip, lift the lever, push in, close it: no crimping.</span></td><td>Amazon</td><td class="num">14.98</td><td class="num">1</td><td class="num">14.98</td></tr>
+          <tr class="cat"><td></td><td colspan="4">Oven, stove and dishes</td><td class="num">52.18</td></tr>
+          <tr><td class="box"><span class="cb">✓</span></td><td><a href="https://www.amazon.com/dp/B0CQ2D2VCN">8 × 10 in clear cast acrylic, 1/8 in, 2-pack</a><span class="dec">KAITELA, cast. It drops into the 10 3/16 × 8 3/16 in pocket on the oven door's inside face as it comes, film off, nothing to cut. One spare sheet.</span></td><td>Amazon</td><td class="num">9.99</td><td class="num">1</td><td class="num">9.99</td></tr>
+          <tr><td class="box"><span class="cb">✓</span></td><td><a href="https://www.amazon.com/dp/B07NVBF3W7">Stainless cooling rack, 9.7 × 7.3 in, 2-pack</a><span class="dec">P&amp;P CHEF. One is the oven rack, on the oak oven floor behind the window. The other is a spare or a second shelf.</span></td><td>Amazon</td><td class="num">8.29</td><td class="num">1</td><td class="num">8.29</td></tr>
+          <tr><td class="box"><span class="cb">✓</span></td><td><a href="https://www.amazon.com/dp/B09SG532Q8">Small dish drying rack, 7.7 in wide</a><span class="dec">Rubber-footed slim rack for the drying bay counter, long axis front to back; the bay is 8 1/2 in wide, so anything under 8 in across works.</span></td><td>Amazon</td><td class="num">21.69</td><td class="num">1</td><td class="num">21.69</td></tr>
+          <tr><td class="box"><span class="cb">✓</span></td><td><a href="https://www.amazon.com/dp/B0G7Y5KY1R">#8-32 × 2 in stainless machine screws, 30</a><span class="dec">Twidec, pan head. Four hold the stove knobs: up from under the counter, through a printed washer and the knob's boss, into the nut captured in the knob.</span></td><td>Amazon</td><td class="num">6.99</td><td class="num">1</td><td class="num">6.99</td></tr>
+          <tr><td class="box"><span class="cb">✓</span></td><td><a href="https://www.amazon.com/dp/B000BQMMFY">#8-32 machine screw nuts, 100</a><span class="dec">Hillman, zinc. One drops into the hex pocket in each stove knob before its boss is glued in.</span></td><td>Amazon</td><td class="num">5.22</td><td class="num">1</td><td class="num">5.22</td></tr>
+          <tr class="cat"><td></td><td colspan="4">Safety</td><td class="num">11.58</td></tr>
+          <tr><td class="box"><span class="cb">✓</span></td><td><a href="https://www.amazon.com/dp/B000FJRYAA">Furniture anti-tip strap kit</a><span class="dec">QuakeHOLD! 4160, two 15 in nylon straps. A 45 in hutch with a toddler on the oven door is a ladder. Strap the back to a stud.</span></td><td>Amazon</td><td class="num">11.58</td><td class="num">1</td><td class="num">11.58</td></tr>
+          <tr class="cat"><td></td><td colspan="4">Tax</td><td class="num">25.94</td></tr>
+          <tr><td class="box"><span class="cb">✓</span></td><td>Sales tax on the two Amazon orders, less a $1.05 coupon<span class="dec">$17.93 + $9.06 tax, −$1.05 coupon: the Amazon lines above plus this one come to the $442.70 charged. Home Depot prices are before tax.</span></td><td>Amazon</td><td class="num">25.94</td><td class="num">1</td><td class="num">25.94</td></tr>
+          <tr class="total"><td></td><td>Total</td><td></td><td></td><td></td><td class="num">824.57</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-head"><h2>Whole project</h2></div>
+    <div class="callouts">
+      <div class="callout"><span class="eyebrow">Plywood</span><span class="big">5<small>panels 48 × 48</small></span><span class="muted">Of the six on hand. S4 and S5 leave strips for door stops; the sixth panel is spare.</span></div>
+      <div class="callout"><span class="eyebrow">Parts</span><span class="big">19<small>CNC parts</small></span><span class="muted">Fourteen carcass panels in dados and rabbets, five doors. Four Shaker panels and the oven window come off the CNC too; the counter gets the sink cutout and the fill port.</span></div>
+      <div class="callout"><span class="eyebrow">Printed</span><span class="big">52<small>parts</small></span><span class="muted">Four burners, four stove knobs with bezels and washers, pan, spatula, plates, canisters, four knob bushings, the pickup foot, the drain funnel, two cap plugs, the fill port and its lid, four window clips, the wiring box and its lid. No supports.</span></div>
+      <div class="callout"><span class="eyebrow">Screws</span><span class="big">89<small>#8 × 1 1/4 in</small></span><span class="muted">Dados locate, glue holds, screws clamp: three per joint. Outside and top heads get oak plugs.</span></div>
+      <div class="callout"><span class="eyebrow">Hardware</span><span class="big">10<small>hinges · 5 knobs · 1 pull</small></span><span class="muted">Two butt hinges per door, cabinet leaves flush in CNC recesses; wood knobs on four doors and the fill-port lid, a 6 in bar pull on the oven, two oak pegs. The stove knobs are printed.</span></div>
+      <div class="callout"><span class="eyebrow">Water</span><span class="big">2<small>jugs · 2 floats</small></span><span class="muted">Clean jug to the pump to the faucet; sink to the dirty jug through a printed funnel. Two float switches cut the pump: clean jug empty, or dirty jug full.</span></div>
+    </div>
+  </section>
+
+  <section class="no-break">
+    <div class="section-head"><h2>Before you cut</h2></div>
+    <div class="tablewrap"><table class="toolpaths">
+      <thead><tr><th class="num">#</th><th>Feature (layer)</th><th>Toolpath</th><th class="num">Depth</th><th class="num">Per pass</th><th>Why this, why now</th></tr></thead>
+      <tbody>
+        <tr><td class="num">1</td><td>Dados and rabbets <span class="dec">blue</span></td><td>Pocket, inside the line</td><td class="num">1/4 in</td><td class="num">1/8 in, 2 passes</td><td>First, while the sheet is one piece. The downcut flutes press the veneer down instead of tearing it up. Test one on an offcut.</td></tr>
+        <tr><td class="num">2</td><td>Hinge recesses, pull dimples <span class="dec">cyan</span></td><td>Pocket</td><td class="num">0.055 in (1.4 mm)</td><td class="num">1 pass</td><td>One hinge leaf deep. Measure a real hinge first: the hinge is the boss, the drawing is a suggestion.</td></tr>
+        <tr><td class="num">3</td><td>Shaker panels, window pocket <span class="dec">purple</span></td><td>Pocket</td><td class="num">1/8 in</td><td class="num">2 passes</td><td>Four door panels and the acrylic's seat on the oven door. Shallow and on show: don't get greedy.</td></tr>
+        <tr><td class="num">4</td><td>Holes <span class="dec">magenta</span></td><td>Contour inside the line</td><td class="num">through</td><td class="num">1/8 in</td><td>Every hole is 1/2 in: the 1/4 in bit circles inside it, so no tool change and no excuses.</td></tr>
+        <tr><td class="num">5</td><td>Inside profiles <span class="dec">green</span></td><td>Contour inside the line</td><td class="num">through</td><td class="num">1/8 in</td><td>Sink cutout, fill-port hole, oven window. Before the outsides, so each part still holds on while its middle leaves.</td></tr>
+        <tr><td class="num">6</td><td>Outside profiles <span class="dec">black</span></td><td>Contour outside the line, tabs</td><td class="num">through</td><td class="num">1/8 in</td><td>Tabs on the big panels or they go for a walk. The sides are L-shaped; Side R is Side L's mirror, on purpose.</td></tr>
+        <tr><td class="num">7</td><td>Break lines <span class="dec">red</span></td><td>Contour on the line</td><td class="num">through</td><td class="num">1/8 in</td><td>Optional. Dead last if you cut them, a screw in each offcut; skip them and saw the parts out of the skeleton.</td></tr>
+      </tbody>
+    </table></div>
+    <p class="muted toolpath-foot">Through = 0.785 in, 0.060 in into the spoilboard; tabs 0.186 in tall from the bottom of the cut, so 1/8 in of wood. The <span class="mono">cnc/</span> Carbide Create files have it all set. Before every sheet, check Z0 with paper: a wrong touch-plate thickness deepens every cut.</p>
+    <ul class="notes">
+      <li><b>The plywood measured 0.715 to 0.725.</b> Parts are sized to 0.72 in and the dados are cut 3/4 in wide: the thick end plus a hair. A thin spot in a dado is a glue line, a thick spot is a mallet, so the dados follow the thick reading. If a new sheet measures differently, change <span class="mono">T</span> and <span class="mono">T_MAX</span> in <span class="mono">design.py</span> and rerun.</li>
+      <li><b>Cut a test dado first.</b> On offcut, pocket one 4 in dado and try a scrap from the thick end of the sheet in it. It should push in by hand with a little friction and no mallet; glue needs room. Too tight: add 0.005 to the <span class="mono">+ 0.01</span> in <span class="mono">DADO_W</span>. Too loose: take 0.005 off.</li>
+      <li><b>Which face up.</b> Pockets only cut into the up face, so: both sides lie inside-face up, so they are mirror images: Side L's front edge on the left, Side R's on the right, each notch at the top front; bottom and upper shelf face up, the bottom with its front (the jug notch) at the top and so its left end on the right; counter and top FACE DOWN, the counter's front edge at the top; the back front-face up; dividers A and B LEFT face up; the three upper dividers are plain; the two sink doors, the drying door and the warming door FRONT FACE UP for their Shaker panels; the oven door INSIDE FACE UP. The sheets say it.</li>
+      <li><b>Hinge recesses, ten of them.</b> 1.4 mm pockets, one leaf deep, the shape of the hinge's cabinet leaf, 3/4 × 2 19/32 in plus a hair, flush with a front edge: two on the left side (lower-left sink door), four on the right side (oven, warming drawer), two each on dividers A and B. Each one runs 1/8 in off the front edge, so the two corners there come out square; the bit leaves the two inner corners with its 1/4 in radius. If your hinge leaf has square corners, square those two with a chisel, a few taps each; if it has 1/4 in round corners it drops straight in. The hinge sits located, and you drill through its own holes. Measure a hinge before S1 runs and set <span class="mono">HINGE_L</span> and <span class="mono">HINGE_LEAF_W</span>.</li>
+      <li><b>Shaker panels.</b> The two sink doors, the drying door and the warming door under the oven get a 1/8 in recessed panel inside a 1 3/4 in frame, cut in the same pocket pass as the oven window; the bit leaves 1/4 in round inside corners, which is right on a toddler piece. Cut those four FRONT FACE UP. The knobs sit on the stile, 7/8 in from the free edge, so their bases never bridge the step. The oven door stays flat, like an appliance, with its window.</li>
+      <li><b>The oven window.</b> The opening is 8 1/2 × 6 1/2 in with 1/2 in corners; the pocket round it on the inside face is 10 3/16 × 8 3/16 in and 1/8 in deep, so a stock 8 × 10 in sheet of 1/8 in acrylic drops in uncut. Do not try to cut acrylic with the wood bit: it melts and welds to the flutes. The pocket leaves 9/16 in of full-thickness door beside it, and the hinge screws live in the door's edge at mid-thickness, well below the pocket floor. The two dimples above it are the bar pull's screw centres, 3 25/32 in apart: drill them 5/32 in through from the inside after the door is painted.</li>
+      <li><b>Rounded ends.</b> A stopped dado ends in a half-round of the bit, so the front corners of the two mid shelves are already rounded 1/4 in in the cut files. Do not square them up. The dividers are through-dadoed, square all round.</li>
+      <li><b>The jug notch.</b> A 10 1/2 in wide notch from the front edge of the bottom panel, 11 7/32 in deep, where the dirty jug stands on the floor: it buys the 3/4 in that lets the strainer clear the funnel (1 3/32 in to spare), and because it is open to the front the full jug slides straight out with both sink doors open, no lifting. It leaves a 3/4 in slot at floor level under the doors; a loose 3/4 × 3/4 strip can sit in it. Both jugs stand with their 2 1/4 in neck to the back: the neck centre is 1 1/8 in from the back edge, so the sink sits 3/8 in back of centre in its bay to put the drain 15/16 in from the dirty jug's neck, inside the funnel's 3 15/16 in mouth. The cutout's back edge is 1 3/32 in from the back panel: enough for the rear sink clips, but check yours. The sink bay is 23 in wide and two 10 in jugs leave 2 5/16 in.</li>
+      <li><b>Check the sink template.</b> The Elkay box has a paper cutout template. Lay it on the 14 3/8 in square in the counter file before S3 runs; the cutout is 1/2 in from divider A and the sink sits to the right and back of its bay on purpose, so the dirty jug's neck is under the drain with the clean jug beside it.</li>
+      <li><b>Knob holes are 1/2 in on purpose.</b> The 1/4 in bit circles them out. On eight doors a printed bushing (1/2 in outside, 3/16 bore) presses in and the wood knob's 8-32 screw runs through it. On the counter the four printed stove knobs have their own 12.4 mm boss that is the axle in the hole; an 8-32 screw and washer from underneath hold them on and they turn.</li>
+      <li><b>The fill port and the pegs.</b> A 1 1/2 in hole in the counter 2 1/2 in left of the sink rim, straight over the clean jug's neck: Contour inside, through, like the cutout. The printed funnel drops in, a 9 in piece of 1/2 in tube from its barb to the second 5/8 in hole in the clean jug's cap, and the lid with its knob sits on top. Two 1/2 in holes through the left side's upper portion, 27 in up and 11 and 15 in from the front: the bit circles them out, and 3 in oak pegs glue through for her apron and towel.</li>
+      <li><b>The cord hole and the brick.</b> A 1/2 in hole in the back panel 15 in up, behind the printed wiring box, which screws on over it. The pump can draw 6 A, so the supply is a 12 V 10 A brick; it stays outside, behind the kitchen, off the floor, and its plug is the adult off switch. The two float switches, a matched side-mount pair, only ever see the relay coil: the clean jug's opens on empty, the dirty jug's opens on full, and either one stops the pump.</li>
+      <li><b>The faucet fits.</b> The ARCORA is 9.3 in tall; there is 10 17/32 in between the counter and the underside of the upper shelf. The upper cabinet is only 8 1/2 in deep, so the counter in front of it is open to the room.</li>
+    </ul>
+  </section>
+
+  <header>
+    <h1>Mini Kitchen Cut List</h1>
+    <div class="spec">
+      <span>Box <b>45 7/8 × 18 × 45 in, counter at 23, upper cabinet 8 1/2 deep</b></span>
+      <span>Bays <b>sink 23 · drying 8 1/2 · stove 11 1/2</b></span>
+      <span>Stock <b>0.72 in red oak ply (measured 0.715 to 0.725), five 48 × 48 panels</b></span>
+      <span>Bit <b>1/4 in downcut for everything</b></span>
+      <span>Joinery <b>1/4 in dados and rabbets, glued and screwed</b></span>
+      <span>Hold-down border <b>1 in all round</b></span>
+      <span>Door reveal <b>3/32 in</b></span>
+    </div>
+  </header>
+
+  <section>
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th>Part</th><th class="num">Qty</th><th class="num">Length (grain)</th><th class="num">Width</th><th>Notes</th><th>Sheet</th></tr></thead>
+        <tbody>
+          <tr><td>Side</td><td class="num">2</td><td class="num">45<span class="dec">45.000 · 1143.0 mm</span></td><td class="num">18<span class="dec">18.000 · 457.2 mm</span></td><td>Hutch profile: 18 in deep to the counter, 8 1/2 in above it. Rabbets top and bottom, dados for the counter and upper shelf. Right: oven shelf dado. Hinge recesses at the lower front edge. Left: two 1/2 in peg holes. Grain vertical.</td><td><span class="sheet-tag">S1</span></td></tr>
+          <tr><td>Upper shelf</td><td class="num">1</td><td class="num">44 15/16<span class="dec">44.940 · 1141.5 mm</span></td><td class="num">7 25/32<span class="dec">7.780 · 197.6 mm</span></td><td>Floor of the four upper cupboards; three through dados on its top face for the upper dividers.</td><td><span class="sheet-tag">S5</span></td></tr>
+          <tr><td>Upper divider</td><td class="num">3</td><td class="num">10 17/32<span class="dec">10.530 · 267.5 mm</span></td><td class="num">7 25/32<span class="dec">7.780 · 197.6 mm</span></td><td>1/4 in into the upper shelf and the top, plain: four equal open compartments. All three in a row on S4.</td><td><span class="sheet-tag">S4</span></td></tr>
+          <tr><td>Back</td><td class="num">1</td><td class="num">44 9/32<span class="dec">44.280 · 1124.7 mm</span></td><td class="num">44 7/16<span class="dec">44.440 · 1128.8 mm</span></td><td>Fills S2. Sits on the bottom, runs to the top, screwed through the sides. 1/2 in cord hole behind the pump.</td><td><span class="sheet-tag">S2</span></td></tr>
+          <tr><td>Counter</td><td class="num">1</td><td class="num">44 15/16<span class="dec">44.940 · 1141.5 mm</span></td><td class="num">17 9/32<span class="dec">17.280 · 438.9 mm</span></td><td>Cut FACE DOWN: through dados for the dividers on the underside. Sink cutout, 1 1/2 in fill port, knob holes.</td><td><span class="sheet-tag">S3</span></td></tr>
+          <tr><td>Bottom</td><td class="num">1</td><td class="num">44 15/16<span class="dec">44.940 · 1141.5 mm</span></td><td class="num">17 9/32<span class="dec">17.280 · 438.9 mm</span></td><td>On the floor. Through dados on the top face; a 10 1/2 in notch from the front edge where the dirty jug stands on the floor and slides out.</td><td><span class="sheet-tag">S3</span></td></tr>
+          <tr><td>Top</td><td class="num">1</td><td class="num">44 15/16<span class="dec">44.940 · 1141.5 mm</span></td><td class="num">7 25/32<span class="dec">7.780 · 197.6 mm</span></td><td>Cut FACE DOWN: three upper divider dados on the underside. Sits in the sides' top rabbets.</td><td><span class="sheet-tag">S3</span></td></tr>
+          <tr><td>Divider</td><td class="num">2</td><td class="num">22 1/16<span class="dec">22.060 · 560.3 mm</span></td><td class="num">17 9/32<span class="dec">17.280 · 438.9 mm</span></td><td>Full depth, 1/4 in into the bottom and the counter. A: hinge recesses on its left face. B: drying shelf dado and hinge recesses on its left face.</td><td><span class="sheet-tag">S4</span></td></tr>
+          <tr><td>Drying shelf</td><td class="num">1</td><td class="num">8 3/4<span class="dec">8.750 · 222.2 mm</span></td><td class="num">16 9/32<span class="dec">16.280 · 413.5 mm</span></td><td>1/4 in into divider B, screwed to divider A. Front corners rounded.</td><td><span class="sheet-tag">S4</span></td></tr>
+          <tr><td>Oven floor</td><td class="num">1</td><td class="num">11 3/4<span class="dec">11.750 · 298.4 mm</span></td><td class="num">16 9/32<span class="dec">16.280 · 413.5 mm</span></td><td>1/4 in into the right side, screwed to divider B. Oven above, warming drawer below.</td><td><span class="sheet-tag">S4</span></td></tr>
+          <tr><td>Sink door</td><td class="num">2</td><td class="num">21 3/8<span class="dec">21.373 · 542.9 mm</span></td><td class="num">11 3/8<span class="dec">11.359 · 288.5 mm</span></td><td>Two inset doors under the sink, 3/32 in reveal, grain vertical. Shaker panel: cut FRONT FACE UP. Light blue.</td><td><span class="sheet-tag">S5</span></td></tr>
+          <tr><td>Drying door</td><td class="num">1</td><td class="num">21 3/8<span class="dec">21.373 · 542.9 mm</span></td><td class="num">8 5/16<span class="dec">8.312 · 211.1 mm</span></td><td>Inset door on the drying cupboard, hinged on divider B. Shaker panel: cut FRONT FACE UP. Light blue.</td><td><span class="sheet-tag">S5</span></td></tr>
+          <tr><td>Oven door</td><td class="num">1</td><td class="num">12 11/32<span class="dec">12.343 · 313.5 mm</span></td><td class="num">11 5/16<span class="dec">11.312 · 287.3 mm</span></td><td>Cut INSIDE FACE UP: window opening, 1/8 in pocket for the stock 8 x 10 acrylic, two dimples for the bar pull. Hinged on the right side. Light blue.</td><td><span class="sheet-tag">S5</span></td></tr>
+          <tr><td>Warming door</td><td class="num">1</td><td class="num">8 1/8<span class="dec">8.122 · 206.3 mm</span></td><td class="num">11 5/16<span class="dec">11.312 · 287.3 mm</span></td><td>Below the oven, hinged on the right side. Shaker panel: cut FRONT FACE UP. Light blue.</td><td><span class="sheet-tag">S5</span></td></tr>
+          <tr class="total"><td>Whole kitchen</td><td class="num">19</td><td></td><td></td><td>5 sheets of 48 × 48</td><td></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-head">
+      <h2>Sheet layouts</h2>
+      <p class="muted">Four 48 × 48 panels (two 4 × 8 sheets ripped in half), drawn to scale. Parts sit 1/2 in apart inside a 1 in hold-down border; the grey band is where your screws go. Red dashed lines are the break cuts: run them last, with a screw in each leftover, so the offcuts come away as rectangles. Blue outlines are dado pockets, 1/4 in deep, and the small blue rectangles at the front edges are the 1.4 mm hinge recesses; the green shape is the sink cutout; the small circles are 1/2 in holes the bit circles out. Parts marked FACE DOWN have their pockets on the underside; the dividers lie LEFT face up.</p>
+    </div>
+    <div class="sheets">
+      <div class="sheet">
+        <div class="sheet-head"><h3>S1 <span>Sides</span></h3><a class="mono" href="cut-sheets/S1-sides.svg">S1-sides.svg</a></div>
+        <svg viewBox="-1 -1 50 50" role="img" aria-label="S1: Sides">
+          <rect class="board" x="0" y="0" width="48" height="48"/>
+          <path class="keep" fill-rule="evenodd" d="M0 0H48V48H0Z M1 1H47V47H1Z"/>
+          <line class="brk" x1="38.75" y1="0" x2="38.75" y2="48"/>
+          <line class="brk" x1="0" y1="47.25" x2="48" y2="47.25"/>
+          <path class="ply" d="M11 1.5H19.5V46.5H1.5V23.5H11Z"/>
+          <path class="groove" fill="none" d="M1.375 45.78H18.905V46.64H1.375V45.78Z"/>
+          <path class="groove" fill="none" d="M1.375 23.5H18.905V24.235H1.375V23.5Z"/>
+          <path class="groove" fill="none" d="M10.875 12.25H18.905V12.985H10.875V12.25Z"/>
+          <path class="groove" fill="none" d="M10.875 1.375H18.905V2.235H10.875V1.375Z"/>
+          <path class="groove" fill="none" d="M1.375 42.3563H2.03A0.25 0.25 0 0 1 2.28 42.6063V44.7662A0.25 0.25 0 0 1 2.03 45.0162H1.375V42.3563Z"/>
+          <path class="groove" fill="none" d="M1.375 24.9837H2.03A0.25 0.25 0 0 1 2.28 25.2337V27.3937A0.25 0.25 0 0 1 2.03 27.6437H1.375V24.9837Z"/>
+          <circle class="hole" cx="12.5" cy="19.5" r="0.25"/>
+          <circle class="hole" cx="16.5" cy="19.5" r="0.25"/>
+          <path class="ply" d="M20 1.5H28.5V23.5H38V46.5H20Z"/>
+          <path class="groove" fill="none" d="M20.595 45.78H38.125V46.64H20.595V45.78Z"/>
+          <path class="groove" fill="none" d="M20.595 23.5H38.125V24.235H20.595V23.5Z"/>
+          <path class="groove" fill="none" d="M20.595 12.25H28.625V12.985H20.595V12.25Z"/>
+          <path class="groove" fill="none" d="M20.595 1.375H28.625V2.235H20.595V1.375Z"/>
+          <path class="groove" fill="none" d="M20.595 36.75H36.75A0.25 0.25 0 0 1 37 37V37.235A0.25 0.25 0 0 1 36.75 37.485H20.595V36.75Z"/>
+          <path class="groove" fill="none" d="M37.47 33.3263H38.125V35.9862H37.47A0.25 0.25 0 0 1 37.22 35.7362V33.5763A0.25 0.25 0 0 1 37.47 33.3263Z"/>
+          <path class="groove" fill="none" d="M37.47 24.9837H38.125V27.6437H37.47A0.25 0.25 0 0 1 37.22 27.3937V25.2337A0.25 0.25 0 0 1 37.47 24.9837Z"/>
+          <path class="groove" fill="none" d="M37.47 42.3563H38.125V45.0162H37.47A0.25 0.25 0 0 1 37.22 44.7662V42.6063A0.25 0.25 0 0 1 37.47 42.3563Z"/>
+          <path class="groove" fill="none" d="M37.47 38.2338H38.125V40.8937H37.47A0.25 0.25 0 0 1 37.22 40.6437V38.4838A0.25 0.25 0 0 1 37.47 38.2338Z"/>
+          <text x="2.5" y="26.1">SIDE L</text><text class="dim" x="2.5" y="28.3">18 × 45</text>
+          <text x="21" y="26.1">SIDE R</text><text class="dim" x="21" y="28.3">18 × 45</text>
+        </svg>
+        <div class="note">Both sides inside-face up, so they are mirror images: Side L's front edge is on the left, Side R's on the right; the notch at the top of each is the upper cabinet's set-back, at the front. The left side's two peg holes go straight through. Break lines free a 9 in wide strip on the right and a 1/2 in strip below.</div>
+      </div>
+
+      <div class="sheet">
+        <div class="sheet-head"><h3>S2 <span>Back</span></h3><a class="mono" href="cut-sheets/S2-back.svg">S2-back.svg</a></div>
+        <svg viewBox="-1 -1 50 50" role="img" aria-label="S2: Back">
+          <rect class="board" x="0" y="0" width="48" height="48"/>
+          <path class="keep" fill-rule="evenodd" d="M0 0H48V48H0Z M1 1H47V47H1Z"/>
+          <line class="brk" x1="46.69" y1="0" x2="46.69" y2="48"/>
+          <line class="brk" x1="0" y1="46.53" x2="48" y2="46.53"/>
+          <path class="ply" d="M1.5 1.5H45.94V45.78H1.5V1.5Z"/>
+          <circle class="hole" cx="13.7" cy="31.5" r="0.25"/>
+          <text x="2.5" y="4.1">BACK</text><text class="dim" x="2.5" y="6.3">44 7/16 × 44 9/32</text>
+        </svg>
+        <div class="note">The back fills the sheet; the cord hole is the only feature. Break lines free a 1 1/16 in wide strip on the right and a 1 7/32 in strip below.</div>
+      </div>
+
+      <div class="sheet">
+        <div class="sheet-head"><h3>S3 <span>Counter, bottom, top</span></h3><a class="mono" href="cut-sheets/S3-counter-bottom-top.svg">S3-counter-bottom-top.svg</a></div>
+        <svg viewBox="-1 -1 50 50" role="img" aria-label="S3: Counter, bottom, top">
+          <rect class="board" x="0" y="0" width="48" height="48"/>
+          <path class="keep" fill-rule="evenodd" d="M0 0H48V48H0Z M1 1H47V47H1Z"/>
+          <line class="brk" x1="47.19" y1="0" x2="47.19" y2="48"/>
+          <line class="brk" x1="0" y1="45.59" x2="48" y2="45.59"/>
+          <path class="ply" d="M1.5 1.5H46.44V18.78H1.5V1.5Z"/>
+          <path class="groove" fill="none" d="M24.75 1.375H25.485V18.905H24.75V1.375Z"/>
+          <path class="groove" fill="none" d="M33.97 1.375H34.705V18.905H33.97V1.375Z"/>
+          <path class="hole" d="M11.375 3.3125H22.75A1.5 1.5 0 0 1 24.25 4.8125V16.1875A1.5 1.5 0 0 1 22.75 17.6875H11.375A1.5 1.5 0 0 1 9.875 16.1875V4.8125A1.5 1.5 0 0 1 11.375 3.3125Z"/>
+          <path class="hole" d="M7.05 10.595H7.05A0.75 0.75 0 0 1 7.8 11.345V11.345A0.75 0.75 0 0 1 7.05 12.095H7.05A0.75 0.75 0 0 1 6.3 11.345V11.345A0.75 0.75 0 0 1 7.05 10.595Z"/>
+          <circle class="hole" cx="36.54" cy="2.8" r="0.25"/>
+          <circle class="hole" cx="39.14" cy="2.8" r="0.25"/>
+          <circle class="hole" cx="41.74" cy="2.8" r="0.25"/>
+          <circle class="hole" cx="44.34" cy="2.8" r="0.25"/>
+          <path class="ply" d="M1.5 19.28H25.24V30.5H35.74V19.28H46.44V36.56H1.5Z"/>
+          <path class="groove" fill="none" d="M22.455 19.155H23.19V36.685H22.455V19.155Z"/>
+          <path class="groove" fill="none" d="M13.235 19.155H13.97V36.685H13.235V19.155Z"/>
+          <path class="ply" d="M1.5 37.06H46.44V44.84H1.5V37.06Z"/>
+          <path class="groove" fill="none" d="M12.32 36.935H13.055V44.965H12.32V36.935Z"/>
+          <path class="groove" fill="none" d="M23.61 36.935H24.345V44.965H23.61V36.935Z"/>
+          <path class="groove" fill="none" d="M34.9 36.935H35.635V44.965H34.9V36.935Z"/>
+          <text x="2.5" y="4.1">COUNTER · FACE DOWN</text><text class="dim" x="2.5" y="6.3">44 15/16 × 17 9/32</text>
+          <text x="2.5" y="21.88">BOTTOM</text><text class="dim" x="2.5" y="24.08">44 15/16 × 17 9/32</text>
+          <text x="2.5" y="39.66">TOP · FACE DOWN</text><text class="dim" x="2.5" y="41.86">44 15/16 × 7 25/32</text>
+        </svg>
+        <div class="note">Counter FACE DOWN, front edge at the top of the sheet (its dados are underneath; the knob holes run along the front). Bottom face up, front edge (the jug notch) at the top too, which puts its left end on the RIGHT. Top FACE DOWN in the strip below. Break lines free a 9/16 in wide strip on the right and a 2 5/32 in strip below.</div>
+      </div>
+
+      <div class="sheet">
+        <div class="sheet-head"><h3>S4 <span>Dividers, mid shelves, upper dividers</span></h3><a class="mono" href="cut-sheets/S4-dividers-mid-shelves-upper-dividers.svg">S4-dividers-mid-shelves-upper-dividers.svg</a></div>
+        <svg viewBox="-1 -1 50 50" role="img" aria-label="S4: Dividers, mid shelves, upper dividers">
+          <rect class="board" x="0" y="0" width="48" height="48"/>
+          <path class="keep" fill-rule="evenodd" d="M0 0H48V48H0Z M1 1H47V47H1Z"/>
+          <line class="brk" x1="46.56" y1="0" x2="46.56" y2="48"/>
+          <line class="brk" x1="0" y1="41.09" x2="48" y2="41.09"/>
+          <path class="ply" d="M1.5 1.5H18.78V23.56H1.5V1.5Z"/>
+          <path class="groove" fill="none" d="M18.25 19.8863H18.905V22.5463H18.25A0.25 0.25 0 0 1 18 22.2963V20.1363A0.25 0.25 0 0 1 18.25 19.8863Z"/>
+          <path class="groove" fill="none" d="M18.25 2.5137H18.905V5.1737H18.25A0.25 0.25 0 0 1 18 4.9237V2.7637A0.25 0.25 0 0 1 18.25 2.5137Z"/>
+          <path class="ply" d="M19.28 1.5H36.56V23.56H19.28V1.5Z"/>
+          <path class="groove" fill="none" d="M19.155 13.015H35.31A0.25 0.25 0 0 1 35.56 13.265V13.5A0.25 0.25 0 0 1 35.31 13.75H19.155V13.015Z"/>
+          <path class="groove" fill="none" d="M36.03 19.8863H36.685V22.5463H36.03A0.25 0.25 0 0 1 35.78 22.2963V20.1363A0.25 0.25 0 0 1 36.03 19.8863Z"/>
+          <path class="groove" fill="none" d="M36.03 2.5137H36.685V5.1737H36.03A0.25 0.25 0 0 1 35.78 4.9237V2.7637A0.25 0.25 0 0 1 36.03 2.5137Z"/>
+          <path class="ply" d="M37.31 1.5H45.56A0.25 0.25 0 0 1 45.81 1.75V17.78H37.06V1.75A0.25 0.25 0 0 1 37.31 1.5Z"/>
+          <path class="ply" d="M1.75 24.06H13A0.25 0.25 0 0 1 13.25 24.31V40.34H1.5V24.31A0.25 0.25 0 0 1 1.75 24.06Z"/>
+          <path class="ply" d="M13.75 24.06H21.53V34.59H13.75V24.06Z"/>
+          <path class="ply" d="M22.03 24.06H29.81V34.59H22.03V24.06Z"/>
+          <path class="ply" d="M30.31 24.06H38.09V34.59H30.31V24.06Z"/>
+          <text x="2.5" y="4.1">DIVIDER A · LEFT FACE UP</text><text class="dim" x="2.5" y="6.3">17 9/32 × 22 1/16</text>
+          <text x="20.28" y="4.1">DIVIDER B · LEFT FACE UP</text><text class="dim" x="20.28" y="6.3">17 9/32 × 22 1/16</text>
+          <text transform="translate(40.36 2.5) rotate(90)">DRY SHELF</text><text class="dim" transform="translate(42.56 2.5) rotate(90)">8 3/4 × 16 9/32</text>
+          <text x="2.5" y="26.66">OVEN FLOOR</text><text class="dim" x="2.5" y="28.86">11 3/4 × 16 9/32</text>
+          <text transform="translate(17.05 25.06) rotate(90)">UPPER DIV 2</text><text class="dim" transform="translate(19.25 25.06) rotate(90)">7 25/32 × 10 17/32</text>
+          <text transform="translate(25.33 25.06) rotate(90)">UPPER DIV 1</text><text class="dim" transform="translate(27.53 25.06) rotate(90)">7 25/32 × 10 17/32</text>
+          <text transform="translate(33.61 25.06) rotate(90)">UPPER DIV 3</text><text class="dim" transform="translate(35.81 25.06) rotate(90)">7 25/32 × 10 17/32</text>
+        </svg>
+        <div class="note">Dividers stand upright, LEFT face up, front edge on the RIGHT, bottom end DOWN (hinge recesses along the front edge of both; the drying shelf dado across B). Shelves below and beside, the three plain upper dividers in a row beside the oven floor. Break lines free a 1 3/16 in wide strip on the right and a 6 21/32 in strip below.</div>
+      </div>
+
+      <div class="sheet">
+        <div class="sheet-head"><h3>S5 <span>Doors, upper shelf</span></h3><a class="mono" href="cut-sheets/S5-doors-upper-shelf.svg">S5-doors-upper-shelf.svg</a></div>
+        <svg viewBox="-1 -1 50 50" role="img" aria-label="S5: Doors, upper shelf">
+          <rect class="board" x="0" y="0" width="48" height="48"/>
+          <path class="keep" fill-rule="evenodd" d="M0 0H48V48H0Z M1 1H47V47H1Z"/>
+          <line class="brk" x1="47.19" y1="0" x2="47.19" y2="48"/>
+          <line class="brk" x1="0" y1="31.9025" x2="48" y2="31.9025"/>
+          <path class="ply" d="M1.5 1.5H12.8594V22.8725H1.5V1.5Z"/>
+          <path class="groove" fill="none" d="M3.5 3.25H10.8594A0.25 0.25 0 0 1 11.1094 3.5V20.8725A0.25 0.25 0 0 1 10.8594 21.1225H3.5A0.25 0.25 0 0 1 3.25 20.8725V3.5A0.25 0.25 0 0 1 3.5 3.25Z"/>
+          <circle class="hole" cx="11.9844" cy="12.1863" r="0.25"/>
+          <path class="ply" d="M13.3594 1.5H24.7188V22.8725H13.3594V1.5Z"/>
+          <path class="groove" fill="none" d="M15.3594 3.25H22.7188A0.25 0.25 0 0 1 22.9688 3.5V20.8725A0.25 0.25 0 0 1 22.7188 21.1225H15.3594A0.25 0.25 0 0 1 15.1094 20.8725V3.5A0.25 0.25 0 0 1 15.3594 3.25Z"/>
+          <circle class="hole" cx="14.2344" cy="12.1863" r="0.25"/>
+          <path class="ply" d="M25.2188 1.5H33.5312V22.8725H25.2188V1.5Z"/>
+          <path class="groove" fill="none" d="M27.2188 3.25H31.5312A0.25 0.25 0 0 1 31.7812 3.5V20.8725A0.25 0.25 0 0 1 31.5312 21.1225H27.2188A0.25 0.25 0 0 1 26.9688 20.8725V3.5A0.25 0.25 0 0 1 27.2188 3.25Z"/>
+          <circle class="hole" cx="26.0938" cy="12.1863" r="0.25"/>
+          <path class="ply" d="M34.0312 1.5H45.3438V13.8425H34.0312V1.5Z"/>
+          <path class="groove" fill="none" d="M34.8875 4.7425H44.4875A0.3 0.3 0 0 1 44.7875 5.0425V12.6425A0.3 0.3 0 0 1 44.4875 12.9425H34.8875A0.3 0.3 0 0 1 34.5875 12.6425V5.0425A0.3 0.3 0 0 1 34.8875 4.7425Z"/>
+          <circle class="groove" fill="none" cx="37.7975" cy="2.5" r="0.175"/>
+          <circle class="groove" fill="none" cx="41.5775" cy="2.5" r="0.175"/>
+          <path class="hole" d="M35.9375 5.5925H43.4375A0.5 0.5 0 0 1 43.9375 6.0925V11.5925A0.5 0.5 0 0 1 43.4375 12.0925H35.9375A0.5 0.5 0 0 1 35.4375 11.5925V6.0925A0.5 0.5 0 0 1 35.9375 5.5925Z"/>
+          <path class="ply" d="M34.0312 14.3425H45.3438V22.465H34.0312V14.3425Z"/>
+          <path class="groove" fill="none" d="M36.0312 16.0925H43.3438A0.25 0.25 0 0 1 43.5938 16.3425V20.465A0.25 0.25 0 0 1 43.3438 20.715H36.0312A0.25 0.25 0 0 1 35.7812 20.465V16.3425A0.25 0.25 0 0 1 36.0312 16.0925Z"/>
+          <circle class="hole" cx="34.9062" cy="18.4038" r="0.25"/>
+          <path class="ply" d="M1.5 23.3725H46.44V31.1525H1.5V23.3725Z"/>
+          <path class="groove" fill="none" d="M12.32 23.2475H13.055V31.2775H12.32V23.2475Z"/>
+          <path class="groove" fill="none" d="M23.61 23.2475H24.345V31.2775H23.61V23.2475Z"/>
+          <path class="groove" fill="none" d="M34.9 23.2475H35.635V31.2775H34.9V23.2475Z"/>
+          <text x="2.5" y="4.1">SINK DOOR L</text><text class="dim" x="2.5" y="6.3">11 3/8 × 21 3/8</text>
+          <text x="14.3594" y="4.1">SINK DOOR R</text><text class="dim" x="14.3594" y="6.3">11 3/8 × 21 3/8</text>
+          <text transform="translate(28.5188 2.5) rotate(90)">DRYING DOOR</text><text class="dim" transform="translate(30.7188 2.5) rotate(90)">8 5/16 × 21 3/8</text>
+          <text x="35.0312" y="4.1">OVEN DOOR · INSIDE FACE UP</text><text class="dim" x="35.0312" y="6.3">11 5/16 × 12 11/32</text>
+          <text x="35.0312" y="16.9425">WARMING DOOR</text><text class="dim" x="35.0312" y="19.1425">11 5/16 × 8 1/8</text>
+          <text x="2.5" y="25.9725">UPPER SHELF</text><text class="dim" x="2.5" y="28.1725">44 15/16 × 7 25/32</text>
+        </svg>
+        <div class="note">Load this sheet with the grain running LEFT TO RIGHT, so the upper shelf's grain runs its length; the doors are painted, so their cross grain never shows. The two sink doors, the drying door and the warming door are FRONT FACE UP for their Shaker panels; the oven door INSIDE FACE UP for its window pocket. The upper shelf runs full length below them, face up, its three dados on top. Break lines free a 9/16 in wide strip on the right and a 15 27/32 in strip below.</div>
+      </div>
+    </div>
+
+  </section>
+
+  <section id="partgrid">
+    <div class="section-head"><h2>3D Printed Parts</h2></div>
+    <div class="part-grid">
+      <figure><img src="previews/parts/drip_pan.png" alt="Drip pan"><figcaption>Drip pan</figcaption></figure>
+      <figure><img src="previews/parts/coil.png" alt="Coil element"><figcaption>Coil element</figcaption></figure>
+      <figure><img src="previews/parts/stove_knob.png" alt="Stove knob"><figcaption>Stove knob</figcaption></figure>
+      <figure><img src="previews/parts/knob_boss.png" alt="Knob boss"><figcaption>Knob boss</figcaption></figure>
+      <figure><img src="previews/parts/bezel.png" alt="Knob bezel"><figcaption>Knob bezel</figcaption></figure>
+      <figure><img src="previews/parts/washer.png" alt="Knob washer"><figcaption>Knob washer</figcaption></figure>
+      <figure><img src="previews/parts/pan.png" alt="Frying pan"><figcaption>Frying pan</figcaption></figure>
+      <figure><img src="previews/parts/spatula.png" alt="Spatula"><figcaption>Spatula</figcaption></figure>
+      <figure><img src="previews/parts/plate.png" alt="Plate"><figcaption>Plate</figcaption></figure>
+      <figure><img src="previews/parts/canister-S.png" alt="Canister S"><figcaption>Canister S</figcaption></figure>
+      <figure><img src="previews/parts/canister-M.png" alt="Canister M"><figcaption>Canister M</figcaption></figure>
+      <figure><img src="previews/parts/canister-L.png" alt="Canister L"><figcaption>Canister L</figcaption></figure>
+      <figure><img src="previews/parts/lid-S.png" alt="Lid S"><figcaption>Lid S</figcaption></figure>
+      <figure><img src="previews/parts/lid-M.png" alt="Lid M"><figcaption>Lid M</figcaption></figure>
+      <figure><img src="previews/parts/lid-L.png" alt="Lid L"><figcaption>Lid L</figcaption></figure>
+      <figure><img src="previews/parts/bushing.png" alt="Knob bushing"><figcaption>Knob bushing</figcaption></figure>
+      <figure><img src="previews/parts/pickup.png" alt="Pickup foot"><figcaption>Pickup foot</figcaption></figure>
+      <figure><img src="previews/parts/funnel.png" alt="Drain funnel"><figcaption>Drain funnel</figcaption></figure>
+      <figure><img src="previews/parts/cap_plug.png" alt="Cap plug"><figcaption>Cap plug</figcaption></figure>
+      <figure><img src="previews/parts/fill_port.png" alt="Fill port"><figcaption>Fill port</figcaption></figure>
+      <figure><img src="previews/parts/fill_lid.png" alt="Fill port lid"><figcaption>Fill port lid</figcaption></figure>
+      <figure><img src="previews/parts/window_clip.png" alt="Window clip"><figcaption>Window clip</figcaption></figure>
+      <figure><img src="previews/parts/wire_box.png" alt="Wiring box"><figcaption>Wiring box</figcaption></figure>
+      <figure><img src="previews/parts/wire_box_lid.png" alt="Wiring box lid"><figcaption>Wiring box lid</figcaption></figure>
+    </div>
+  </section>
+
+  <section id="assembly">
+    <div class="section-head"><h2>Assembly</h2><p class="muted">Dado joinery, belt and braces: every panel edge sits 1/4 in into a pocket in its neighbour, glued with Titebond III, and then screwed through from the outside, three #8 × 1 1/4 in screws per joint, countersunk. The dado locates, the glue holds, the screws clamp it while the glue sets and keep it square when a toddler hangs off a door. Heads on the two outside faces and the top get oak plugs.</p></div>
+    <div class="tablewrap"><table>
+      <thead><tr><th>Joint</th><th>How</th><th class="num">Screws</th><th>Why</th></tr></thead>
+      <tbody>
+        <tr><td>Bottom, counter, upper shelf into the sides</td><td>Bottom in a rabbet at the floor edge, counter in a full-depth dado, upper shelf in a dado across the upper portion; glue, 3 screws through each side into each panel edge, plugged</td><td class="num">18</td><td>The panels are 44 15/16 in long: 1/4 in into each side. Self-squaring.</td></tr>
+        <tr><td>Top into the sides</td><td>Rabbet along the top of each side's upper portion, glue, 3 screws down through the top into each side, plugged</td><td class="num">6</td><td>Flush top, no end grain of the sides showing above it.</td></tr>
+        <tr><td>Dividers A and B</td><td>Through dados in the bottom (top face) and counter (underside), glue; 3 screws up through the bottom into each, 2 toe-screws from inside the drying bay into the counter</td><td class="num">10</td><td>They are 22 1/16 in: the opening plus 1/4 in each end, full depth. Nothing shows on the counter.</td></tr>
+        <tr><td>Upper dividers (3)</td><td>Through dados in the upper shelf and the top, glue; 3 screws up through the upper shelf and 3 down through the top into each, plugged</td><td class="num">18</td><td>Four equal open compartments, her dishes at eye level.</td></tr>
+        <tr><td>Drying shelf</td><td>Stopped dado in divider B's left face, glue, 2 screws through B; left end butts divider A, 2 screws through A from the sink bay</td><td class="num">4</td><td>A's left face has the sink door's hinge recesses, so its right face stays plain and the dado went to B.</td></tr>
+        <tr><td>Oven floor</td><td>Stopped dado in the right side, glue, 3 screws through the side, plugged; left end butts divider B, 2 screws through B from the drying bay</td><td class="num">5</td><td>Heads inside the drying cupboard, behind its door.</td></tr>
+        <tr><td>Back</td><td>Butt joint between the sides, on the bottom panel, up to the top; glue, 6 screws through each side into its edges, plugged, and 4 each into the bottom, counter and upper shelf edges from behind</td><td class="num">24</td><td>The back is the shear panel; the strap goes through it into the wall.</td></tr>
+        <tr><td>Doors (5)</td><td>Two 2 1/2 in butt hinges each, cabinet leaves flush in the 1.4 mm CNC recesses, door leaves on the door edges; stop strips glued behind</td><td class="num">20 (supplied)</td><td>Inset, 3/32 in reveal. Sink, drying and warming doors are Shaker-panelled, the oven door flat. Wood knobs on the stiles, 7/8 in from the free edges, on printed bushings; the oven door gets the bar pull.</td></tr>
+        <tr><td>Fill port, pegs</td><td>Printed funnel into the counter hole on a bead of silicone under its flange; 1/2 in tube from its barb to the clean jug's cap; two 3 in oak pegs glued through the left side, flush inside</td><td class="num">0</td><td>She refills the kitchen herself; apron and towel hang where she can reach them.</td></tr>
+        <tr><td>Oven window</td><td>Acrylic in the pocket on the door's inside face on a thin bead of clear silicone, four printed clips over its corners, #6 × 1/2 screws</td><td class="num">4 (#6)</td><td>From the front the acrylic bears on the pocket shoulder, so it cannot be pushed in.</td></tr>
+        <tr><td>Pump and wiring box</td><td>Pump's rubber feet screwed to the back panel behind the jugs, #6 × 1/2, long axis across; printed wiring box beside it over the cord hole, four #6 × 1/2 through its floor, four through its lid</td><td class="num">12 (#6)</td><td>Off the floor, out of the way of the jugs, barbs pointing at the jug and the faucet. Every wire joint is inside the box.</td></tr>
+        <tr><td>Burners, stove knobs</td><td>Drip pan down, coil in, one #8 × 1 1/4 in screw through the coil's centre cap into the counter (7/64 pilot); nut in the knob, boss glued in, boss through the 1/2 in hole, bezel glued round it, 8-32 screw and washer from below, snug not tight</td><td class="num">4</td><td>Four knobs that turn and four burners that stay put.</td></tr>
+      </tbody>
+    </table></div>
+    <figure class="fig"><img src="exploded.png" alt="Exploded view of the kitchen from the OpenSCAD model: the two L-shaped sides, bottom, back, counter with sink cutout, upper shelf, top, two dividers, three upper dividers, mid shelves, five doors, burners, with the sink, faucet, jugs, pump and rack ghosted in"><figcaption>Every panel, pulled apart, with the bought parts ghosted in. From the OpenSCAD model (<span class="mono">part = "exploded"</span>).</figcaption></figure>
+    <figure class="fig float-fig"><img src="float.svg" alt="Section through the two jugs: the clean jug with the pickup foot on its floor and a side-mount float low on its back wall; the dirty jug with the funnel in its cap and a side-mount float high on its back wall; how a side-mount float goes in; the steps in order"><figcaption>Step 11, the jugs: one side-mount float low on the clean jug (stops the pump on empty), one high on the dirty jug (stops it on full), each on a 2-pin plug.</figcaption></figure>
+    <figure class="fig plumb-fig"><img src="plumbing.svg" alt="The water run from left to right: the clean jug's drilled cap with the pickup tube and fill tube pushed through it, the pump with its strainer and barbs, the 1/2 to 3/8 reducer, the 3/8 barb tee, and two 3/8 barb by 1/2 NPT adapters screwed up into the faucet's two supply-hose nuts; close-ups of a clamped barb joint, an adapter with PTFE tape going into a hose nut, and the cap's two push-through holes"><figcaption>Step 13, the tubing: every coupler from the clean jug to the faucet, and how each kind of joint goes together.</figcaption></figure>
+    <figure class="fig wiring-fig"><img src="wiring.svg" alt="Wiring: the 12 V supply's barrel adapter feeds a lever connector on the plus side and one on the ground side; plus goes to relay pin 30 and down through the clean jug's float, then the dirty jug's float, into relay coil pin 85; ground goes to coil pin 86 and the pump's black lead; relay pin 87 feeds the pump's red lead"><figcaption>Step 10, the wiring. Everything inside the dashed line lives in the printed wiring box, in its labelled connector slots. Both floats sit in series on the relay coil, so an empty clean jug or a full dirty jug stops the pump.</figcaption></figure>
+    <figure class="fig box-fig"><img src="previews/wire_box_wired.png" alt="Top view of the open wiring box: relay standing on the right with its five leads going left into the connectors' single ends, 87a capped; six lever connectors in labelled slots in the middle; the pump pair down from the top notch, the supply pair up through the cord hole and the two float runs in from the bottom notches, all landing on the left, output ends; no wire crosses another"><figcaption>Step 10, inside the box, lid off, as you face it. Relay leads come in from the right, outside wires from the left, and nothing crosses. 87a is capped on purpose, and SERIES's single end stays empty.</figcaption></figure>
+    <ol class="steps">
+      <li><b>Dry fit, then label</b><p>Lay the left side flat, pockets up. Stand the bottom in its rabbet, the counter in its dado, the upper shelf in the dado across the upper portion, drop the top into its rabbet, then lower the right side on. Everything should seat by hand. Mark FRONT and INSIDE on every panel in pencil now; it is the last time you will see all the edges.</p></li>
+      <li><b>Dividers, dry</b><p>Dividers A and B into the bottom's through dados, hinge recesses on both facing left, then the counter over them so its underside dados swallow their tops. Drying shelf into divider B's dado, oven floor into the right side's. The three upper dividers into the upper shelf, top over them. Note where the shelf screws go: through A into the drying shelf, through B into the oven floor.</p></li>
+      <li><b>Glue and screw, the base</b><p>Take it apart. Glue in the left side's bottom rabbet and counter dado, the bottom's two dados, the counter's two. Rebuild in the same order with the left side flat, slide the shelves in and screw their free ends (2 screws each, countersunk, heads inside the sink bay and the drying bay), lower the right side on, clamp across the width at every panel, check the diagonals. Now the screws: pilot 7/64 in and countersink (on the two outside faces and the top, counterbore 3/8 in and 1/4 in deep so the oak plugs seat), three through each side into each panel edge, three up through the bottom into each divider, two toe-screws from the drying bay up into the counter. Let it sit an hour.</p></li>
+      <li><b>Upper shelf, upper dividers, top</b><p>Glue in the sides' upper-shelf dados and top rabbets, the upper shelf's two dados and the top's. Upper shelf in, the three upper dividers in, top on. Three screws through each side into the upper shelf, three down through the top into each side and into each upper divider, three up through the upper shelf into each upper divider.</p></li>
+      <li><b>Back</b><p>Lay the box on its face, back on: it sits on the bottom panel and runs to the top, cord hole low in the sink bay. Six screws through each side into its edges and four through it into each of the bottom, counter and upper shelf edges.</p></li>
+      <li><b>Plug, then band</b><p>Glue a 3/8 in oak plug into every counterbore on the two outside faces and the top, grain lined up, trim flush with a flush-cut saw and a block. Then the edge banding: iron the oak banding onto every plywood edge that shows. The carcass first, as one continuous run per edge: the front edges of both sides including the step, the front edges of the top, upper shelf, counter and bottom between them, the front edges of the four dividers and both mid shelves. Then the doors, all four edges of each, before they are hung and before they are painted; the 3/32 in reveal already allows for the banding's thickness. Trim with a banding trimmer or a sharp block plane, break the corners with a sanding block.</p></li>
+      <li><b>Doors and knobs</b><p>Seat each hinge's cabinet leaf in its recess and drill through the hinge's holes; screw it. Hold the door in its opening on 3/32 in shims, mark the door-edge leaf, drill through the hinge again, screw. Glue a 3/4 × 1 in offcut strip behind each door's top edge as a stop. Press a bushing into each knob hole, wood knobs on. The oven door: drill its two dimples 5/32 in through, bar pull on from the inside. Stove knobs: drop an 8-32 nut into the hex pocket in each knob's face, glue the boss over it, boss through the counter hole, bezel glued round it, 2 in screw and washer up from underneath into the nut, snug enough to turn with a little drag.</p></li>
+      <li><b>Finish before the water parts go in</b><p>Everything in the Finish section happens now: poly on the carcass, primer and enamel on the doors, with the sink, faucet, pump and jugs still in their boxes. Then the window: peel the acrylic, a thin bead of clear silicone in the pocket, acrylic in, four printed clips over its corners with #6 × 1/2 screws.</p></li>
+      <li><b>Pump and wiring box</b><p>The pump goes on the back panel in the sink bay, long axis across, feet to the back, 16 1/2 in up, so it sits behind the jugs' shoulders: four #6 × 1/2 through its rubber feet. The printed wiring box goes right of it, and the cord hole places it: hold the box's big floor hole over the cord hole, RELAY label top right, two notches along the bottom edge and one in the top edge, edges square to the cabinet, and drive four #6 × 1/2 through its countersunk floor holes. It sits 1 19/32 in off the back, behind the jugs, clear of the bowl and the faucet hoses. Lid off until the wiring is done.</p></li>
+      <li><b>Wire the box</b><p>Two sides, and nothing crosses: the relay stands on the right and its five leads go left into the connectors' single-wire ends; every wire from outside comes in on the left and lands on their output ends. One lever connector per labelled slot, lying on its side, output end toward the label: 1-in-2-out in GND, +12V and SERIES, 1-in-1-out in PUMP+, 85 and 87a. Strip 11 mm, lift the lever, push the wire home, close it; wire each connector in your hand, then press it into its slot. <strong>Relay:</strong> into its socket, stood on the two feet at the bottom of its bay with the leads coming out between them, one small zip tie through each saddle's tunnel and round it. <strong>Relay leads</strong>, by the numbers moulded on the socket, not the colours, into the single ends: 87 to PUMP+, 86 to GND, 30 to +12V, 85 to 85, 87a alone in 87a as a cap. SERIES's single end stays empty. <strong>Pump:</strong> its pair in through the top notch beside the column, red to PUMP+, black to GND's upper output. <strong>Supply:</strong> 2 ft of the red/black wire, one end into the barrel adapter's screw terminals (red to +, black to −), the other pushed in from behind through the cord hole: black to GND's lower output, red to +12V's upper. <strong>Float runs:</strong> one length of red/black to each jug's plug, about 3 ft for the clean jug and 2 ft for the dirty. Clean, through the left bottom notch: red to +12V's lower output, black to SERIES's upper. Dirty, through the right bottom notch: red to SERIES's lower output, black to 85. The current goes +12V, clean float, SERIES, dirty float, 85, through the coil, 86, GND: both floats closed or nothing. At the far end each run meets the box-side half of its jug's 2-pin plug with two 1-in-1-out connectors. <strong>Test</strong> before the lid: plug both jugs in, water in the clean jug, plug the brick in: the relay clicks. Unplug either jug's plug: it clicks off. Lid on with four #6 × 1/2 in its corners; its tongues close the notches over the wires. The brick's plug at the wall is the off switch.</p></li>
+      <li><b>Jugs, foot, funnel</b><p>Both jugs stand neck to the back, and each gets one of the two side-mount floats through a 5/8 in hole in its back wall. To fit one: lower the switch into the jug through the neck on its lead, fish the lead out through the hole from inside with a bent wire, pull the thread through, gasket on the inside under the flange, nut on the outside. (If yours has its flange at the cable end instead, it mounts from outside and the nut has to go on from inside; the dirty jug's hole is reachable through the neck, the clean jug's is not, so check before drilling.) Clean jug: hole 2 in up; set the float so the switch is closed with the float up and opens when the water drops away (flip the float if not; a multimeter settles it). It stops the pump with about 0.9 gal left. Drill its spare cap 5/8 in for the pickup tube and a second 5/8 in for the fill tube; push the printed foot onto a 30 in piece of 1/2 in tube, through the cap, foot to the floor. Dirty jug: hole 12 in up; set the float so the switch is closed with the float down and opens when water lifts it, about 5 gal: the sink stops before the jug can overflow. Drill its cap 1 1/2 in (1 5/8 or 1 3/4 in also fits the funnel), printed funnel in. Both: a 2-pin pigtail plug on each float's lead at the top of the jug's back wall, the float's two leads joined to one half with two 1-in-1-out lever connectors; the other half takes that jug's run from the wiring box (step 10) the same way. A foot of slack. Dirty jug on the floor in the notch in the bottom panel with the funnel under the strainer; 2 ft of slack in the pickup tube so the clean jug can come forward to the doors. There is 1 3/32 in between the strainer and the funnel rim; if your strainer hangs lower, trim the funnel's mouth.</p></li>
+      <li><b>Sink, faucet, strainer</b><p>Silicone bead on the counter around the cutout, drop the sink in, tighten the clips, wipe the squeeze-out. Faucet in the rear-deck hole per its sheet, supply hoses hanging below; swap its aerator for the Tri-Max, set to 0.5 GPM. Basket strainer into the drain on plumber's putty; the tailpiece, cut to a 1 in stub, points it at the funnel.</p></li>
+      <li><b>Tubing</b><p>Pickup line from the clean jug's cap to the strainer on the pump's inlet, clamp. From the pump's outlet barb a short 1/2 in tube to the big end of the stainless barb reducer, clamp, then 3/8 in tube from its small end to the tee, clamp both. From the tee's two legs, a short 3/8 tube each onto a 1/2 NPT × 3/8 barb adapter, clamp, and screw each adapter into one of the faucet's supply nuts; the washer inside the nut seals it. Two gallons in the clean jug, plug the brick in, open the faucet: the pump primes in a few seconds and the tap runs; close it and the pump stops. Lift the foot out of the water and the pump stops too.</p></li>
+      <li><b>Emptying and refilling</b><p>Both sink doors open. Dirty jug: unplug its float lead, lift the funnel out of its cap, push the printed plug into the hole, slide the jug straight out on the floor through the notch, carry it to a drain, pour, plug out, funnel back in, slide it home under the strainer. Clean jug: day to day she refills it herself through the port beside the sink, a small pitcher at a time; the fill tube just drops into the cap's second hole. To take the jug out: slide it forward to the doors, unplug its float lead, lift the fill tube out, unscrew the drilled cap and lift cap, tube and foot out together (set the foot in a cup, it drips a spoonful), put the jug's own cap on and carry it. The tube stays connected to the pump the whole time.</p></li>
+      <li><b>Fill port and pegs</b><p>Silicone under the funnel's flange, drop it into the counter hole, tube from its barb down into the cap's third hole, lid on with a spare wood knob screwed through it from the ring side. Cut two 3 in pegs from the oak dowel, glue them through the left side's two holes, flush on the inside, 2 1/4 in proud outside, and ease their ends with sandpaper.</p></li>
+      <li><b>Strap it</b><p>Anti-tip strap from the back of the top panel to a wall stud. Then let the kid loose.</p></li>
+    </ol>
+  </section>
+
+  <section id="finish">
+    <div class="section-head"><h2>Finish</h2><p class="muted">Two finishes: clear polyurethane on everything oak, the open shelves and the oven included, and pale blue cabinet enamel on the five doors. The enemy is end grain and the cutout edge, which drink water. Seal them as if they were the top.</p></div>
+    <div class="tablewrap"><table>
+      <thead><tr><th>What</th><th>When</th><th>Why then</th></tr></thead>
+      <tbody>
+        <tr><td>Sand 150 then 180, ease the banded edges with a sanding block (no round-over bit: it would cut through the banding)</td><td>After plugs and banding, before any finish</td><td>An eased edge holds finish; a sharp one wears through to bare wood under small hands.</td></tr>
+        <tr><td>Flood coat the sink cutout edge, the counter underside around the cutout, the jug hole, all end grain</td><td>Poly coat 1, thinned 10 percent</td><td>Thinned poly soaks into end grain instead of sitting on it.</td></tr>
+        <tr><td>Three coats of poly on every oak surface, 220 scuff between coats; two more on the counter top, the cutout and the whole inside of the sink bay, floor included</td><td>Coats 1 to 5, 4 to 24 h apart per the can</td><td>Three is the minimum for a wipe-down surface; the sink bay lives under two jugs.</td></tr>
+        <tr><td>Doors: one coat of primer, two of enamel, both faces and all four edges, 220 scuff between</td><td>Off the hinges, flat on blocks, after the banding</td><td>Flat doors are easy doors; a brush mark on a flat slab shows. Thin coats, or a foam roller.</td></tr>
+        <tr><td>Cure</td><td>7 days before the first water, 7 before the doors are hung and handled</td><td>Dry to the touch is not cured; water on a soft film leaves white rings, fingers on soft enamel leave prints.</td></tr>
+        <tr><td>Silicone under the sink rim and around the cutout edge; a thin bead round the acrylic</td><td>Installation day</td><td>Belt and braces: the poly seals the wood, the silicone keeps the water from reaching it.</td></tr>
+      </tbody>
+    </table></div>
+    <ol class="steps">
+      <li><b>Sand and ease</b><p>150 then 180 on every face, plugs flush, banding edges eased with a block, a few strokes at 45 degrees. Vacuum, then wipe with a tack cloth.</p></li>
+      <li><b>Seal the thirsty parts</b><p>Brush thinned poly into the sink cutout, the jug hole, every end-grain edge, the underside of the counter and the inside of the sink bay. Let it soak, wipe the drips, let it dry.</p></li>
+      <li><b>Build the film</b><p>Three thin coats over all the oak, scuffed with 220 between. Then two more on the counter, cutout, drying bay and the sink bay. The five wood knobs and the two pegs get the same three coats before they go on; the printed parts get nothing.</p></li>
+      <li><b>Paint the doors</b><p>Off the hinges, flat on blocks: primer, 220, enamel, 220, enamel. All five doors pastel blue; edges too. On the Shaker doors, brush the recessed panel and its corners first, then roll the frame. A foam roller leaves no brush marks on a flat door. Keep the hinge recesses on the carcass clear of poly build-up.</p></li>
+      <li><b>Wait a week, then plumb</b><p>Only after the full cure: window, silicone, sink, faucet, pump, jugs, tube. Tip the dirty jug out after play and leave the sink doors open to dry; the poly will outlast the toddler.</p></li>
+    </ol>
+  </section>
+
+  <section id="printed">
+    <div class="section-head"><h2>Printed parts</h2><p class="muted"><span class="mono">printed.scad</span>, millimetres, STLs in <span class="mono">stl/</span>. PLA or ASA, 0.2 mm layers, 3 walls, 15 percent infill. Every part prints in the orientation it is modelled in, with no supports. The dish rack is bought now, not printed. Tick Printed when it is off the bed and cleaned up, Fitted when it is on the kitchen.</p></div>
+    <div class="tablewrap"><table>
+      <thead><tr><th class="box">Printed</th><th class="box">Fitted</th><th>Part</th><th class="num">Qty</th><th>File</th><th>Notes</th></tr></thead>
+      <tbody>
+        <tr><td class="box"><span class="cb"></span></td><td class="box"><span class="cb"></span></td><td>Drip pan, 4 in</td><td class="num">4</td><td class="mono">stl/drip_pan.stl</td><td>Silver or light grey. Sloped wall, centre hole; the coil's screw clamps it down. About 35 g each.</td></tr>
+        <tr><td class="box"><span class="cb"></span></td><td class="box"><span class="cb"></span></td><td>Coil element</td><td class="num">4</td><td class="mono">stl/coil.stl</td><td>Black. Three-turn spiral with a 16 mm centre cap and a terminal tail, drops into the pan. One #8 × 1 1/4 in screw down through the cap holds coil and pan to the counter. About 25 g each.</td></tr>
+        <tr><td class="box"><span class="cb"></span></td><td class="box"><span class="cb"></span></td><td>Stove knob body</td><td class="num">4</td><td class="mono">stl/stove_knob.stl</td><td>Black, prints face down, pointer up. The hexagon in the face is a pocket for an 8-32 nut: drop the nut in, glue the boss over it. About 18 g each.</td></tr>
+        <tr><td class="box"><span class="cb"></span></td><td class="box"><span class="cb"></span></td><td>Knob boss</td><td class="num">4</td><td class="mono">stl/knob_boss.stl</td><td>The knob's 12.4 mm axle, prints standing. Glues into the knob face and turns in the 1/2 in counter hole; screw and washer from below. 3 g each.</td></tr>
+        <tr><td class="box"><span class="cb"></span></td><td class="box"><span class="cb"></span></td><td>Knob bezel</td><td class="num">4</td><td class="mono">stl/bezel.stl</td><td>Tick ring glued round each knob hole, OFF at the back. 5 g each.</td></tr>
+        <tr><td class="box"><span class="cb"></span></td><td class="box"><span class="cb"></span></td><td>Knob washer, 20 mm</td><td class="num">4</td><td class="mono">stl/washer.stl</td><td>Under each stove-knob screw head so it slides on the counter's underside when the knob turns. Print six, any colour.</td></tr>
+        <tr><td class="box"><span class="cb"></span></td><td class="box"><span class="cb"></span></td><td>Frying pan, 110 mm</td><td class="num">1</td><td class="mono">stl/pan.stl</td><td>Black, prints flat; the handle runs from the base so nothing hangs in the air. About 45 g.</td></tr>
+        <tr><td class="box"><span class="cb"></span></td><td class="box"><span class="cb"></span></td><td>Spatula, 180 mm</td><td class="num">1</td><td class="mono">stl/spatula.stl</td><td>Black, prints flat. About 25 g.</td></tr>
+        <tr><td class="box"><span class="cb"></span></td><td class="box"><span class="cb"></span></td><td>Plate, 100 mm</td><td class="num">4</td><td class="mono">stl/plate.stl</td><td>Light colour, for the dish rack. About 20 g each; print six if you like.</td></tr>
+        <tr><td class="box"><span class="cb"></span></td><td class="box"><span class="cb"></span></td><td>Canisters with lids, S/M/L</td><td class="num">3</td><td class="mono">stl/canister-*.stl, stl/lid-*.stl</td><td>Light colour cans, contrast lids, lids dimple-side down. They live on the first open shelf, where she can see them. About 150 g the set.</td></tr>
+        <tr><td class="box"><span class="cb"></span></td><td class="box"><span class="cb"></span></td><td>Door-knob bushing, 1/2 in OD × 3/16 bore</td><td class="num">4</td><td class="mono">stl/bushing.stl</td><td>Presses into each door's CNC'd knob hole so the wood knob's 8-32 screw runs centred. 2 g each; print five.</td></tr>
+        <tr><td class="box"><span class="cb"></span></td><td class="box"><span class="cb"></span></td><td>Fill port</td><td class="num">1</td><td class="mono">stl/fill_port.stl</td><td>Prints mouth down, no supports. An 80 mm funnel mouth standing 1 in above the counter, flange on the counter, 36 mm spout through the 1 1/2 in hole, 1/2 in barb below for the tube to the clean jug's cap. She refills the kitchen with her own pitcher. Black, about 45 g.</td></tr>
+        <tr><td class="box"><span class="cb"></span></td><td class="box"><span class="cb"></span></td><td>Fill port lid</td><td class="num">1</td><td class="mono">stl/fill_lid.stl</td><td>Prints flat, ring up. An 84 mm disc with a ring that drops into the mouth; a spare wood knob screws to it from the ring side. Any colour, 20 g.</td></tr>
+        <tr><td class="box"><span class="cb"></span></td><td class="box"><span class="cb"></span></td><td>Pump pickup foot</td><td class="num">1</td><td class="mono">stl/pickup.stl</td><td>Prints socket-side down, no supports. Slotted cup on four legs on the end of the pickup tube in the clean jug: water comes in through the slots, down the hollow cone and through a 10 mm bore into the tube. 36 mm across, so it drops through the jug's 2 1/4 in neck. Black, about 16 g.</td></tr>
+        <tr><td class="box"><span class="cb"></span></td><td class="box"><span class="cb"></span></td><td>Drain funnel</td><td class="num">1</td><td class="mono">stl/funnel.stl</td><td>Prints mouth down, no supports. 100 mm mouth, 37.5 mm spout, 52 mm flange: the spout drops into a 1 1/2 in hole drilled in the dirty jug's cap (a 1 5/8 or 1 3/4 in hole saw works too) and the mouth sits under the strainer. The neck is at the jug's back edge and the drain {frac(DRAIN_OFF)} in from it, well inside the mouth. Black, about 25 g.</td></tr>
+        <tr><td class="box"><span class="cb"></span></td><td class="box"><span class="cb"></span></td><td>Cap plug</td><td class="num">2</td><td class="mono">stl/cap_plug.stl</td><td>Prints flat. A disc with a spigot that fills the funnel hole in the dirty jug's cap: funnel out, plug in, carry the jug to the drain without a drip. One spare. Any colour, 10 g.</td></tr>
+        <tr><td class="box"><span class="cb"></span></td><td class="box"><span class="cb"></span></td><td>Wiring box</td><td class="num">1</td><td class="mono">stl/wire_box.stl</td><td>Prints floor down, no supports. 152 × 102 × 38 mm. Screws to the back panel over the cord hole on four #6 screws in a rectangle. The relay stands on the right on two zip-tie saddles; six labelled slots in the middle hold the lever connectors on their sides (GND, +12V and SERIES 1-in-2-out; PUMP+, 85 and 87a 1-in-1-out), outputs left toward the outside wires, relay leads into the single ends from the right, so nothing crosses. Three notches let the outside wires in. Slot widths are WB_LCS in printed.scad if your connectors differ. Any colour, about 100 g.</td></tr>
+        <tr><td class="box"><span class="cb"></span></td><td class="box"><span class="cb"></span></td><td>Wiring box lid</td><td class="num">1</td><td class="mono">stl/wire_box_lid.stl</td><td>Prints face down. 3 mm plate, four countersunk #6 × 1/2 into the box's corner bosses, vents over the relay coil, tongues that close the wire notches, a keeper bar that stops 1 mm in front of the connectors, 12 V on its face. About 50 g.</td></tr>
+        <tr><td class="box"><span class="cb"></span></td><td class="box"><span class="cb"></span></td><td>Oven window clip</td><td class="num">4</td><td class="mono">stl/window_clip.stl</td><td>22 × 14 × 3 mm plate, countersunk for a #6 × 1/2 screw. Four hold the acrylic in its pocket on the oven door's inside face, one per corner. Any colour, 2 g each.</td></tr>
+      </tbody>
+    </table></div>
+  </section>
+
+
+  <section id="checklist">
+    <div class="section-head"><h2>Cut checklist</h2><p class="muted">Tick Cut when the part is off the CNC and measured, Holes when its pockets and holes are done. Parts with nothing but an outline show a dash.</p></div>
+    <div class="tablewrap unit-check"><table>
+      <thead><tr><th class="box">Cut</th><th class="box">Holes</th><th>Part</th><th class="num">Length (grain)</th><th class="num">Width</th><th>Sheet</th></tr></thead>
+      <tbody>
+        <tr><td class="box"><span class="cb"></span></td><td class="box"><span class="cb"></span><span class="cnt">dados · 2 recesses · 2 peg holes</span></td><td>Side L</td><td class="num">45 <span class="dec-inline">45.000 in · 1143.0 mm</span></td><td class="num">18 <span class="dec-inline">18.000 in · 457.2 mm</span></td><td><span class="sheet-tag">S1</span></td></tr>
+        <tr><td class="box"><span class="cb"></span></td><td class="box"><span class="cb"></span><span class="cnt">dados · 4 recesses</span></td><td>Side R</td><td class="num">45 <span class="dec-inline">45.000 in · 1143.0 mm</span></td><td class="num">18 <span class="dec-inline">18.000 in · 457.2 mm</span></td><td><span class="sheet-tag">S1</span></td></tr>
+        <tr><td class="box"><span class="cb"></span></td><td class="box"><span class="cb"></span><span class="cnt">dados</span></td><td>Upper shelf</td><td class="num">44 15/16 <span class="dec-inline">44.940 in · 1141.5 mm</span></td><td class="num">7 25/32 <span class="dec-inline">7.780 in · 197.6 mm</span></td><td><span class="sheet-tag">S5</span></td></tr>
+        <tr><td class="box"><span class="cb"></span></td><td class="box"><span class="cnt">—</span></td><td>Upper divider 1</td><td class="num">10 17/32 <span class="dec-inline">10.530 in · 267.5 mm</span></td><td class="num">7 25/32 <span class="dec-inline">7.780 in · 197.6 mm</span></td><td><span class="sheet-tag">S4</span></td></tr>
+        <tr><td class="box"><span class="cb"></span></td><td class="box"><span class="cnt">—</span></td><td>Upper divider 2</td><td class="num">10 17/32 <span class="dec-inline">10.530 in · 267.5 mm</span></td><td class="num">7 25/32 <span class="dec-inline">7.780 in · 197.6 mm</span></td><td><span class="sheet-tag">S4</span></td></tr>
+        <tr><td class="box"><span class="cb"></span></td><td class="box"><span class="cnt">—</span></td><td>Upper divider 3</td><td class="num">10 17/32 <span class="dec-inline">10.530 in · 267.5 mm</span></td><td class="num">7 25/32 <span class="dec-inline">7.780 in · 197.6 mm</span></td><td><span class="sheet-tag">S4</span></td></tr>
+        <tr><td class="box"><span class="cb"></span></td><td class="box"><span class="cb"></span><span class="cnt">cord hole</span></td><td>Back</td><td class="num">44 9/32 <span class="dec-inline">44.280 in · 1124.7 mm</span></td><td class="num">44 7/16 <span class="dec-inline">44.440 in · 1128.8 mm</span></td><td><span class="sheet-tag">S2</span></td></tr>
+        <tr><td class="box"><span class="cb"></span></td><td class="box"><span class="cb"></span><span class="cnt">cutout · port · dados · holes</span></td><td>Counter</td><td class="num">44 15/16 <span class="dec-inline">44.940 in · 1141.5 mm</span></td><td class="num">17 9/32 <span class="dec-inline">17.280 in · 438.9 mm</span></td><td><span class="sheet-tag">S3</span></td></tr>
+        <tr><td class="box"><span class="cb"></span></td><td class="box"><span class="cb"></span><span class="cnt">dados · hole</span></td><td>Bottom</td><td class="num">44 15/16 <span class="dec-inline">44.940 in · 1141.5 mm</span></td><td class="num">17 9/32 <span class="dec-inline">17.280 in · 438.9 mm</span></td><td><span class="sheet-tag">S3</span></td></tr>
+        <tr><td class="box"><span class="cb"></span></td><td class="box"><span class="cb"></span><span class="cnt">dados</span></td><td>Top</td><td class="num">44 15/16 <span class="dec-inline">44.940 in · 1141.5 mm</span></td><td class="num">7 25/32 <span class="dec-inline">7.780 in · 197.6 mm</span></td><td><span class="sheet-tag">S3</span></td></tr>
+        <tr><td class="box"><span class="cb"></span></td><td class="box"><span class="cb"></span><span class="cnt">recesses</span></td><td>Divider A</td><td class="num">22 1/16 <span class="dec-inline">22.060 in · 560.3 mm</span></td><td class="num">17 9/32 <span class="dec-inline">17.280 in · 438.9 mm</span></td><td><span class="sheet-tag">S4</span></td></tr>
+        <tr><td class="box"><span class="cb"></span></td><td class="box"><span class="cb"></span><span class="cnt">dado · recesses</span></td><td>Divider B</td><td class="num">22 1/16 <span class="dec-inline">22.060 in · 560.3 mm</span></td><td class="num">17 9/32 <span class="dec-inline">17.280 in · 438.9 mm</span></td><td><span class="sheet-tag">S4</span></td></tr>
+        <tr><td class="box"><span class="cb"></span></td><td class="box"><span class="cnt">—</span></td><td>Drying shelf</td><td class="num">8 3/4 <span class="dec-inline">8.750 in · 222.2 mm</span></td><td class="num">16 9/32 <span class="dec-inline">16.280 in · 413.5 mm</span></td><td><span class="sheet-tag">S4</span></td></tr>
+        <tr><td class="box"><span class="cb"></span></td><td class="box"><span class="cnt">—</span></td><td>Oven floor</td><td class="num">11 3/4 <span class="dec-inline">11.750 in · 298.4 mm</span></td><td class="num">16 9/32 <span class="dec-inline">16.280 in · 413.5 mm</span></td><td><span class="sheet-tag">S4</span></td></tr>
+        <tr><td class="box"><span class="cb"></span></td><td class="box"><span class="cb"></span><span class="cnt">hole · panel</span></td><td>Sink door L</td><td class="num">21 3/8 <span class="dec-inline">21.373 in · 542.9 mm</span></td><td class="num">11 3/8 <span class="dec-inline">11.359 in · 288.5 mm</span></td><td><span class="sheet-tag">S5</span></td></tr>
+        <tr><td class="box"><span class="cb"></span></td><td class="box"><span class="cb"></span><span class="cnt">hole · panel</span></td><td>Sink door R</td><td class="num">21 3/8 <span class="dec-inline">21.373 in · 542.9 mm</span></td><td class="num">11 3/8 <span class="dec-inline">11.359 in · 288.5 mm</span></td><td><span class="sheet-tag">S5</span></td></tr>
+        <tr><td class="box"><span class="cb"></span></td><td class="box"><span class="cb"></span><span class="cnt">hole · panel</span></td><td>Drying door</td><td class="num">21 3/8 <span class="dec-inline">21.373 in · 542.9 mm</span></td><td class="num">8 5/16 <span class="dec-inline">8.312 in · 211.1 mm</span></td><td><span class="sheet-tag">S5</span></td></tr>
+        <tr><td class="box"><span class="cb"></span></td><td class="box"><span class="cb"></span><span class="cnt">window · pocket · dimples</span></td><td>Oven door</td><td class="num">12 11/32 <span class="dec-inline">12.343 in · 313.5 mm</span></td><td class="num">11 5/16 <span class="dec-inline">11.312 in · 287.3 mm</span></td><td><span class="sheet-tag">S5</span></td></tr>
+        <tr><td class="box"><span class="cb"></span></td><td class="box"><span class="cb"></span><span class="cnt">hole · panel</span></td><td>Warming door</td><td class="num">8 1/8 <span class="dec-inline">8.122 in · 206.3 mm</span></td><td class="num">11 5/16 <span class="dec-inline">11.312 in · 287.3 mm</span></td><td><span class="sheet-tag">S5</span></td></tr>
+      </tbody>
+    </table></div>
+  </section>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- S5 Doors, upper shelf. Units: inches, 1:1, sheet 48 x 48. Cut with a 1/4 in downcut bit (see gen_c2d.py). Parts sit 0.5 in apart. -->
+<!-- Layers: outside profiles = Cutout, outside the line, through. inside profiles = Contour inside the line, through. -->
+<!-- holes = 0.5 in, Contour inside the line with the 1/4 in bit, through. dados = Pocket, 0.25 in deep, inside the outline. -->
+<!-- 1 in all round is never cut by a part: hold-down screws go there. Red break lines are on-path through cuts to the edge; cut them LAST with a screw in each leftover. -->
+<svg xmlns="http://www.w3.org/2000/svg" width="48in" height="48in" viewBox="0 0 48 48">
+  <g id="sheet-outline" fill="none" stroke="#999999" stroke-width="0.02">
+    <rect x="0" y="0" width="48" height="48"/>
+  </g>
+  <g id="hold-down-zones-delete-before-cutting" fill="#dddddd" stroke="none">
+    <path fill-rule="evenodd" d="M0 0H48V48H0Z M1 1H47V47H1Z"/>
+  </g>
+  <g id="dados-pocket-0.25in-deep" fill="none" stroke="#0000ff" stroke-width="0.01">
+    <path d="M12.32 23.2475H13.055V31.2775H12.32V23.2475Z"/>
+    <path d="M23.61 23.2475H24.345V31.2775H23.61V23.2475Z"/>
+    <path d="M34.9 23.2475H35.635V31.2775H34.9V23.2475Z"/>
+  </g>
+  <g id="recesses-and-dimples-pocket-0.055in-deep" fill="none" stroke="#00aaaa" stroke-width="0.01">
+    <circle cx="37.7975" cy="2.5" r="0.175"/>
+    <circle cx="41.5775" cy="2.5" r="0.175"/>
+  </g>
+  <g id="panel-and-window-pockets-0.13in-deep" fill="none" stroke="#8800ff" stroke-width="0.01">
+    <path d="M3.5 3.25H10.8594A0.25 0.25 0 0 1 11.1094 3.5V20.8725A0.25 0.25 0 0 1 10.8594 21.1225H3.5A0.25 0.25 0 0 1 3.25 20.8725V3.5A0.25 0.25 0 0 1 3.5 3.25Z"/>
+    <path d="M15.3594 3.25H22.7188A0.25 0.25 0 0 1 22.9688 3.5V20.8725A0.25 0.25 0 0 1 22.7188 21.1225H15.3594A0.25 0.25 0 0 1 15.1094 20.8725V3.5A0.25 0.25 0 0 1 15.3594 3.25Z"/>
+    <path d="M27.2188 3.25H31.5312A0.25 0.25 0 0 1 31.7812 3.5V20.8725A0.25 0.25 0 0 1 31.5312 21.1225H27.2188A0.25 0.25 0 0 1 26.9688 20.8725V3.5A0.25 0.25 0 0 1 27.2188 3.25Z"/>
+    <path d="M34.8875 4.7425H44.4875A0.3 0.3 0 0 1 44.7875 5.0425V12.6425A0.3 0.3 0 0 1 44.4875 12.9425H34.8875A0.3 0.3 0 0 1 34.5875 12.6425V5.0425A0.3 0.3 0 0 1 34.8875 4.7425Z"/>
+    <path d="M36.0312 16.0925H43.3438A0.25 0.25 0 0 1 43.5938 16.3425V20.465A0.25 0.25 0 0 1 43.3438 20.715H36.0312A0.25 0.25 0 0 1 35.7812 20.465V16.3425A0.25 0.25 0 0 1 36.0312 16.0925Z"/>
+  </g>
+  <g id="holes-drill-0.5in-through" fill="none" stroke="#ff00ff" stroke-width="0.01">
+    <circle cx="11.9844" cy="12.1863" r="0.25"/>
+    <circle cx="14.2344" cy="12.1863" r="0.25"/>
+    <circle cx="26.0938" cy="12.1863" r="0.25"/>
+    <circle cx="34.9062" cy="18.4038" r="0.25"/>
+  </g>
+  <g id="inside-profiles-contour-inside-through" fill="none" stroke="#008800" stroke-width="0.01">
+    <path d="M35.9375 5.5925H43.4375A0.5 0.5 0 0 1 43.9375 6.0925V11.5925A0.5 0.5 0 0 1 43.4375 12.0925H35.9375A0.5 0.5 0 0 1 35.4375 11.5925V6.0925A0.5 0.5 0 0 1 35.9375 5.5925Z"/>
+  </g>
+  <g id="outside-profiles-cutout-through" fill="none" stroke="#000000" stroke-width="0.01">
+    <path d="M1.5 1.5H12.8594V22.8725H1.5V1.5Z"/>
+    <path d="M13.3594 1.5H24.7188V22.8725H13.3594V1.5Z"/>
+    <path d="M25.2188 1.5H33.5312V22.8725H25.2188V1.5Z"/>
+    <path d="M34.0312 1.5H45.3438V13.8425H34.0312V1.5Z"/>
+    <path d="M34.0312 14.3425H45.3438V22.465H34.0312V14.3425Z"/>
+    <path d="M1.5 23.3725H46.44V31.1525H1.5V23.3725Z"/>
+  </g>
+  <g id="break-lines-on-path-through-cut-last" fill="none" stroke="#ff0000" stroke-width="0.01">
+    <line x1="47.19" y1="0" x2="47.19" y2="48"/>
+    <line x1="0" y1="31.9025" x2="48" y2="31.9025"/>
+  </g>
+  <g id="labels-delete-before-cutting" fill="#888888" font-family="Helvetica, Arial, sans-serif" font-size="0.6">
+    <text x="2" y="2.6">SINK DOOR L  11 3/8 × 21 3/8</text>
+    <text x="13.8594" y="2.6">SINK DOOR R  11 3/8 × 21 3/8</text>
+    <text x="25.7188" y="2.6">DRYING DOOR  8 5/16 × 21 3/8</text>
+    <text x="34.5312" y="2.6">OVEN DOOR  11 5/16 × 12 11/32  INSIDE FACE UP</text>
+    <text x="34.5312" y="15.4425">WARMING DOOR  11 5/16 × 8 1/8</text>
+    <text x="2" y="24.4725">UPPER SHELF  44 15/16 × 7 25/32</text>
+    <text x="24" y="47.7" text-anchor="middle">1 IN HOLD-DOWN BORDER ALL ROUND, SCREWS HERE, NO PARTS</text>
+  </g>
+</svg>

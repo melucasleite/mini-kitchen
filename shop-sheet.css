@@ -1,0 +1,240 @@
+<style>
+  :root {
+    --paper: #f8f7f3;
+    --paper-2: #efede6;
+    --ink: #1e2422;
+    --ink-2: #5a605c;
+    --rule: #c4c1b7;
+    --chalk: #2456a4;
+    --chalk-soft: #dfe7f5;
+    --birch: #e6cda3;
+    --birch-light: #f1e2c4;
+    --birch-edge: #a8875a;
+    --offcut: #d9d6cc;
+    --offcut-line: #b3afa2;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --paper: #191b1c;
+      --paper-2: #222527;
+      --ink: #e9e7e0;
+      --ink-2: #a3a59e;
+      --rule: #3c4043;
+      --chalk: #86ace8;
+      --chalk-soft: #23304a;
+      --birch: #6a5433;
+      --birch-light: #7d6640;
+      --birch-edge: #c9a978;
+      --offcut: #2c2f31;
+      --offcut-line: #4a4e51;
+    }
+  }
+  :root[data-theme="dark"] {
+    --paper: #191b1c;
+    --paper-2: #222527;
+    --ink: #e9e7e0;
+    --ink-2: #a3a59e;
+    --rule: #3c4043;
+    --chalk: #86ace8;
+    --chalk-soft: #23304a;
+    --birch: #6a5433;
+    --birch-light: #7d6640;
+    --birch-edge: #c9a978;
+    --offcut: #2c2f31;
+    --offcut-line: #4a4e51;
+  }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: "Barlow", "Helvetica Neue", Arial, sans-serif;
+    font-size: 16px;
+    line-height: 1.5;
+    padding-block: 40px 72px;
+    padding-inline: 20px;
+  }
+  .page { max-width: 920px; margin: 0 auto; display: flex; flex-direction: column; gap: 44px; }
+
+  h1, h2, h3 { font-family: "Barlow Condensed", "Arial Narrow", sans-serif; text-wrap: balance; margin: 0; line-height: 1.05; }
+  h1 { font-size: 26px; font-weight: 600; }
+  .cover h1 { font-size: 40px; font-weight: 700; letter-spacing: -0.01em; }
+  h2 { font-size: 26px; font-weight: 600; }
+  h3 { font-size: 19px; font-weight: 600; }
+  .eyebrow { font-family: "Barlow Condensed", sans-serif; font-weight: 600; font-size: 13px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--chalk); }
+  .mono { font-family: "JetBrains Mono", "SFMono-Regular", Menlo, monospace; font-variant-numeric: tabular-nums; }
+  p { margin: 0; max-width: 62ch; }
+  .muted { color: var(--ink-2); }
+
+  .cover { display: flex; flex-direction: column; gap: 22px; }
+  .cover-img { width: 100%; height: auto; display: block; border-radius: 4px; }
+  .cover-text { display: flex; flex-direction: column; gap: 12px; }
+  .cover-sub { max-width: 70ch; font-size: 17px; }
+  header { display: flex; flex-direction: column; gap: 14px; border-bottom: 2px solid var(--ink); padding-bottom: 22px; }
+  .features { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+  .feature { display: flex; flex-direction: column; gap: 6px; padding: 14px 14px 12px; background: var(--paper-2); border-radius: 6px; }
+  .feature svg { width: 36px; height: 36px; stroke: var(--chalk); fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; margin-bottom: 4px; }
+  .feature b { font-family: "Barlow Condensed", sans-serif; font-weight: 600; font-size: 18px; line-height: 1.1; }
+  .feature span { font-size: 13px; line-height: 1.4; color: var(--ink-2); }
+  .spec { display: flex; flex-wrap: wrap; gap: 8px 28px; font-size: 15px; }
+  .spec span { display: inline-flex; gap: 8px; align-items: baseline; }
+  .spec b { font-family: "JetBrains Mono", monospace; font-weight: 600; font-variant-numeric: tabular-nums; }
+
+  section { display: flex; flex-direction: column; gap: 16px; }
+  .section-head { display: flex; flex-direction: column; gap: 4px; }
+
+  .tablewrap { overflow-x: auto; }
+  table { border-collapse: collapse; width: 100%; min-width: 620px; font-size: 15px; }
+  th, td { text-align: left; padding: 9px 12px; border-bottom: 1px solid var(--rule); vertical-align: top; }
+  th { font-family: "Barlow Condensed", sans-serif; font-size: 13px; letter-spacing: 0.1em; text-transform: uppercase; font-weight: 600; color: var(--ink-2); border-bottom: 2px solid var(--ink); }
+  td.num, th.num { text-align: right; font-family: "JetBrains Mono", monospace; font-variant-numeric: tabular-nums; white-space: nowrap; }
+  td .dec { display: block; font-size: 12px; color: var(--ink-2); }
+  tr.total td { border-bottom: none; border-top: 2px solid var(--ink); font-weight: 600; }
+  .sheet-tag { display: inline-block; font-family: "JetBrains Mono", monospace; font-size: 12px; font-weight: 600; padding: 1px 7px; border-radius: 3px; background: var(--chalk-soft); color: var(--chalk); }
+
+  .sheets { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 22px; }
+  .sheet { display: flex; flex-direction: column; gap: 8px; }
+  .sheet-head { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; }
+  .sheet-head h3 span { color: var(--ink-2); font-weight: 500; }
+  .sheet svg { width: 100%; height: auto; display: block; max-width: 100%; }
+  .sheet .note { font-size: 13.5px; color: var(--ink-2); }
+
+  svg .ply { fill: var(--birch); stroke: var(--birch-edge); stroke-width: 0.25; }
+  svg .off { fill: var(--offcut); stroke: var(--offcut-line); stroke-width: 0.2; stroke-dasharray: 0.8 0.6; }
+  svg .board { fill: none; stroke: var(--ink); stroke-width: 0.35; }
+  svg text { font-family: "Barlow Condensed", sans-serif; font-weight: 600; fill: var(--ink); font-size: 2.3px; }
+  svg text.dim { font-family: "JetBrains Mono", monospace; font-weight: 400; font-size: 1.9px; fill: var(--ink-2); }
+  svg text.offlabel { font-size: 1.9px; fill: var(--ink-2); font-weight: 500; }
+  svg .grain { stroke: var(--birch-edge); stroke-width: 0.12; opacity: 0.55; }
+  svg .groove { stroke: var(--ink); stroke-width: 0.14; opacity: 0.5; }
+  svg .hole { fill: var(--offcut); stroke: var(--ink); stroke-width: 0.2; }
+  svg .keep { fill: var(--ink); opacity: 0.09; }
+  svg .brk { stroke: #c0392b; stroke-width: 0.3; stroke-dasharray: 1.4 0.9; }
+
+  .callouts { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; }
+  .callout { background: var(--paper-2); padding: 16px 18px; display: flex; flex-direction: column; gap: 6px; }
+  .callout .big { font-family: "Barlow Condensed", sans-serif; font-size: 40px; font-weight: 700; line-height: 1; font-variant-numeric: tabular-nums; }
+  .callout .big small { font-size: 16px; font-weight: 500; color: var(--ink-2); margin-left: 4px; }
+
+  ul.notes { margin: 0; padding-left: 20px; display: flex; flex-direction: column; gap: 8px; max-width: 70ch; }
+  ul.notes li b { font-weight: 600; }
+  ol.steps { margin: 0; padding-left: 0; list-style: none; counter-reset: step; display: flex; flex-direction: column; gap: 14px; max-width: 72ch; }
+  ol.steps li { counter-increment: step; position: relative; padding-left: 56px; }
+  ol.steps li::before { content: counter(step, decimal-leading-zero); position: absolute; left: 0; top: 0; width: 44px; font-family: "Barlow Condensed", sans-serif; font-weight: 700; font-size: 26px; line-height: 1; color: var(--chalk); padding-top: 2px; font-variant-numeric: tabular-nums; }
+  ol.steps li b { display: block; font-family: "Barlow Condensed", sans-serif; font-weight: 600; font-size: 18px; margin-bottom: 2px; }
+  ol.steps li p { margin: 0; max-width: none; }
+  ol.steps li p + p { margin-top: 6px; }
+  figure.fig { margin: 12px 0 0; }
+  figure.fig svg { width: 100%; height: auto; display: block; max-width: 100%; }
+  figure.fig figcaption { font-size: 13.5px; color: var(--ink-2); margin-top: 6px; max-width: 70ch; }
+  .fig-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 14px; margin-top: 12px; }
+  .fig-grid figure.fig { margin: 0; }
+  svg .f-front { fill: var(--birch); stroke: var(--ink); stroke-width: 0.18; stroke-linejoin: round; }
+  svg .f-top { fill: var(--birch-light); stroke: var(--ink); stroke-width: 0.18; stroke-linejoin: round; }
+  svg .f-ghost { fill-opacity: 0.3; }
+  svg .f-side { fill: var(--birch-edge); stroke: var(--ink); stroke-width: 0.18; stroke-linejoin: round; }
+  figure.fig svg text.lbl { font-family: "Barlow Condensed", sans-serif; font-weight: 600; font-size: 1.5px; fill: var(--ink); paint-order: stroke; stroke: var(--paper); stroke-width: 0.5px; }
+  figure.fig svg text.lbl-v { font-family: "Barlow Condensed", sans-serif; font-weight: 600; font-size: 1.3px; fill: var(--ink); writing-mode: vertical-rl; text-anchor: middle; paint-order: stroke; stroke: var(--paper); stroke-width: 0.5px; }
+  figure.fig svg text.dim { font-family: "JetBrains Mono", monospace; font-size: 0.95px; fill: var(--ink-2); }
+  svg .dimln { stroke: var(--ink-2); stroke-width: 0.08; stroke-dasharray: 0.4 0.3; }
+  svg .foot { fill: none; stroke: var(--ink-2); stroke-width: 0.1; stroke-dasharray: 0.5 0.35; }
+  svg .dowel { fill: var(--chalk); stroke: none; }
+  svg .screw { stroke: var(--ink); stroke-width: 0.16; }
+  svg .cup { fill: var(--chalk-soft); stroke: var(--chalk); stroke-width: 0.12; }
+  svg .sys { fill: var(--chalk); }
+  svg .arrow { stroke: var(--chalk); stroke-width: 0.45; marker-end: url(#arrowhead); }
+  svg .brace { fill: none; stroke: var(--chalk); stroke-width: 0.9; stroke-linecap: round; }
+  svg .dowel-bar { fill: var(--chalk); stroke: none; }
+  svg .screwg { stroke: var(--ink); stroke-width: 0.28; stroke-linecap: round; }
+  svg .jig, svg .f-front.jig, svg .f-top.jig, svg .f-side.jig { fill: var(--chalk-soft); stroke: var(--chalk); }
+  svg .jigp { fill: var(--chalk-soft); fill-opacity: 0.75; stroke: var(--chalk); stroke-width: 0.12; }
+  svg .lip { stroke: var(--chalk); stroke-width: 0.45; stroke-linecap: square; }
+  svg .bore { fill: var(--paper); stroke: var(--ink); stroke-width: 0.1; }
+  svg .pinm { fill: var(--chalk); stroke: var(--ink); stroke-width: 0.08; }
+  svg .pencil { stroke: var(--ink-2); stroke-width: 0.08; stroke-dasharray: 0.6 0.4; }
+  svg .window { fill: var(--paper); stroke: var(--chalk); stroke-width: 0.08; }
+  svg .opening { fill: var(--offcut); stroke: none; }
+  svg .spacer { fill: var(--chalk); stroke: none; }
+  svg .bit { fill: var(--ink-2); stroke: none; }
+  svg .collar { fill: var(--ink); stroke: none; }
+  td.box, th.box { width: 34px; padding-left: 4px; padding-right: 4px; white-space: nowrap; font-size: 11px; letter-spacing: 0.06em; }
+  .cnt { font-family: "JetBrains Mono", monospace; font-size: 10.5px; color: var(--ink-2); margin-left: 4px; vertical-align: 1px; }
+  .cb { display: inline-block; width: 13px; height: 13px; border: 1.5px solid var(--ink); border-radius: 2px; vertical-align: -1px; }
+  .dec-inline { display: block; font-size: 11px; color: var(--ink-2); font-weight: 400; }
+  .unit-check table { min-width: 560px; }
+  svg .edge { fill: var(--offcut); stroke: var(--offcut-line); stroke-width: 0.08; }
+  svg .hole-dowel { fill: var(--chalk); stroke: none; }
+  svg .hole-screw { fill: var(--ink); stroke: none; }
+  svg .hole-pilot { fill: var(--ink-2); stroke: none; }
+  svg .hole-cable { fill: var(--paper); stroke: var(--ink); stroke-width: 0.1; }
+  svg .hole-cup { fill: var(--chalk-soft); stroke: var(--chalk); stroke-width: 0.1; }
+  svg .hole-foot { fill: none; stroke: var(--ink); stroke-width: 0.08; stroke-dasharray: 0.35 0.25; }
+  svg .extln { stroke: var(--ink-2); stroke-width: 0.05; }
+  #holemap svg .ah { fill: var(--ink); stroke: none; }
+  #holemap svg .dimln { stroke: var(--ink); stroke-width: 0.06; stroke-dasharray: none; }
+  #holemap svg text.dim { fill: var(--ink); font-family: "JetBrains Mono", monospace; }
+  #holemap svg text.dimsm { fill: var(--ink-2); font-family: "JetBrains Mono", monospace; }
+  .part-block { display: flex; flex-direction: column; gap: 10px; margin-top: 22px; }
+  .part-block h3 { font-size: 20px; }
+  a { color: var(--chalk); text-decoration-thickness: 1px; text-underline-offset: 2px; }
+  a:focus-visible { outline: 2px solid var(--chalk); outline-offset: 2px; }
+
+  @page { size: letter; margin: 0.6in 0.6in 0.7in; }
+  @media print {
+    :root, :root[data-theme="dark"], :root:not([data-theme="light"]) {
+      --paper: #ffffff; --paper-2: #f1efe9; --ink: #1e2422; --ink-2: #4c524e; --rule: #b9b6ad;
+      --chalk: #1f4d94; --chalk-soft: #dfe7f5; --birch: #e6cda3; --birch-light: #f1e2c4; --birch-edge: #a8875a;
+      --offcut: #d9d6cc; --offcut-line: #b3afa2;
+    }
+    /* Flex and grid containers suppress fragmentation in every engine, so everything that must break becomes a block. */
+    .page, section, .section-head, header, .cover, .cover-text, .sheet, ol.steps, .callouts, .sheets, .fig-grid, .part-block { display: block; }
+    .part-block { break-before: page; page-break-before: always; break-inside: avoid; page-break-inside: avoid; }
+    #holemap .section-head + .part-block { break-before: auto; }
+    #holemap figure.fig svg { max-height: 4.9in; }
+    #holemap table { font-size: 10px; }
+    #holemap td, #holemap th { padding: 5px 8px; }
+    .part-block h3 { break-after: avoid; }
+    .page { max-width: none; }
+    p, figure.fig figcaption, .cover-sub, .section-head p { max-width: none; }
+    body { padding-block: 0; padding-inline: 0; font-size: 11.5px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    header { break-before: page; page-break-before: always; margin-bottom: 18px; }
+    .section-head { margin-bottom: 10px; }
+    .section-head p { margin-top: 4px; }
+    section { break-before: page; page-break-before: always; margin: 0; }
+    section.no-break, header + section { break-before: auto; page-break-before: auto; margin-top: 30px; }
+    header + section { margin-top: 0; }
+    .cover { break-before: auto; page-break-before: auto; break-after: page; page-break-after: always; }
+    .cover-img { max-height: 4in; width: auto; max-width: 100%; margin: 0 auto 14px; border-radius: 0; }
+    .features { display: grid !important; grid-template-columns: repeat(4, 1fr); gap: 10px; break-inside: avoid; page-break-inside: avoid; }
+    .feature { display: block; padding: 10px 10px 8px; break-inside: avoid; page-break-inside: avoid; }
+    .feature svg { width: 28px; height: 28px; display: block; margin-bottom: 4px; }
+    .feature b { display: block; font-size: 15px; margin-bottom: 3px; }
+    .feature span { font-size: 10.5px; line-height: 1.35; }
+    .cover-sub { font-size: 14px; }
+    .cover-text > * + * { margin-top: 10px; }
+    .cover h1 { font-size: 34px; }
+    h2, h3, .section-head { break-after: avoid; page-break-after: avoid; }
+    .section-head + * { break-before: avoid; }
+    table { font-size: 11px; min-width: 0; width: 100%; margin-bottom: 12px; }
+    tr, .callout, .unit-check, .tablewrap, figure.fig, .sheet { break-inside: avoid; page-break-inside: avoid; }
+    figure.fig img, figure.fig svg, .sheet svg { break-inside: avoid; page-break-inside: avoid; display: block; }
+    figure.fig figcaption { break-before: avoid; page-break-before: avoid; }
+    figure.fig { margin: 10px 0 14px; }
+    figure.fig svg { max-height: 8in; }
+    .sheets::after, .fig-grid::after, .callouts::after { content: ""; display: block; clear: both; }
+    .sheet { float: left; width: 31%; margin: 0 2% 14px 0; }
+    .sheet:nth-child(3n) { margin-right: 0; }
+    header + section table { font-size: 10.5px; }
+    header + section td, header + section th { padding: 5px 8px; }
+    .fig-grid figure.fig { float: left; width: 48%; margin: 0 4% 14px 0; }
+    .fig-grid figure.fig:nth-child(2n) { margin-right: 0; }
+    .callout { float: left; width: 47%; margin: 0 3% 12px 0; }
+    .callout:nth-child(2n) { margin-right: 0; }
+    ol.steps { max-width: none; column-count: 2; column-gap: 28px; }
+    ol.steps li { margin-bottom: 14px; break-inside: avoid; page-break-inside: avoid; }
+    ol.steps li b { break-after: avoid; }
+    ul.notes { display: block; max-width: none; column-count: 2; column-gap: 28px; }
+    ul.notes li { margin-bottom: 8px; break-inside: avoid; page-break-inside: avoid; }
+    a { color: inherit; text-decoration: none; }
+    .sheet-head a::after { content: ""; }
+  }
+</style>

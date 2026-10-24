@@ -1,0 +1,112 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 45.0 21.2" role="img" aria-label="The two jugs in section with their side-mount float switches, a detail of a side-mount switch through the wall, and the steps"><rect width="45.0" height="21.2" fill="#f8f7f3"/><rect x="2.300" y="10.600" width="9.800" height="7.900" rx="0.000" fill="#bfd6ec" stroke="none" stroke-width="0"/>
+<rect x="2.200" y="4.600" width="10.000" height="14.000" rx="0.300" fill="none" stroke="#1e2422" stroke-width="0.05"/>
+<rect x="9.950" y="4.000" width="2.250" height="0.600" rx="0.000" fill="#f8f7f3" stroke="#1e2422" stroke-width="0.05"/>
+<rect x="9.800" y="3.650" width="2.550" height="0.380" rx="0.080" fill="#e6cda3" stroke="#1e2422" stroke-width="0.05"/>
+<text x="7.200" y="19.850" style="font-family:Helvetica, Arial, sans-serif;font-size:0.4px;font-weight:700;fill:#1e2422;text-anchor:middle">Clean jug, 10 × 10 × 14 in</text>
+<text x="2.000" y="18.650" style="font-family:Helvetica, Arial, sans-serif;font-size:0.26px;font-weight:400;fill:#5a605c;text-anchor:end">floor</text>
+<text x="2.300" y="19.050" style="font-family:Helvetica, Arial, sans-serif;font-size:0.26px;font-weight:400;fill:#5a605c;text-anchor:start">front</text>
+<text x="12.100" y="19.050" style="font-family:Helvetica, Arial, sans-serif;font-size:0.26px;font-weight:400;fill:#5a605c;text-anchor:end">back</text>
+<path d="M4.900 18.550 L4.900 17.600 L5.170 17.150 L5.170 16.700 L6.030 16.700 L6.030 17.150 L6.300 17.600 L6.300 18.550Z" fill="#2a2a2c" stroke="#1e2422" stroke-width="0.03"/>
+<line x1="5.050" y1="18.350" x2="5.050" y2="17.700" stroke="#f8f7f3" stroke-width="0.04"/>
+<line x1="5.320" y1="18.350" x2="5.320" y2="17.700" stroke="#f8f7f3" stroke-width="0.04"/>
+<line x1="5.590" y1="18.350" x2="5.590" y2="17.700" stroke="#f8f7f3" stroke-width="0.04"/>
+<line x1="5.860" y1="18.350" x2="5.860" y2="17.700" stroke="#f8f7f3" stroke-width="0.04"/>
+<line x1="6.130" y1="18.350" x2="6.130" y2="17.700" stroke="#f8f7f3" stroke-width="0.04"/>
+<path d="M5.290 16.700 V12.600 Q5.290 9.600 10.765 8.600 V2.200 h0.62 V8.600 Q5.910 9.600 5.910 12.600 V16.700 Z" fill="#dbe9f6" stroke="#2456a4" stroke-width="0.03"/>
+<text x="10.575" y="2.600" style="font-family:Helvetica, Arial, sans-serif;font-size:0.26px;font-weight:400;fill:#2456a4;text-anchor:end">to the pump</text>
+<text x="4.700" y="17.400" style="font-family:Helvetica, Arial, sans-serif;font-size:0.28px;font-weight:400;fill:#1e2422;text-anchor:end">pickup foot</text>
+<rect x="11.750" y="16.280" width="0.350" height="0.640" rx="0.000" fill="#2a2a2c" stroke="#1e2422" stroke-width="0.02"/>
+<rect x="12.100" y="16.400" width="0.550" height="0.400" rx="0.000" fill="#555" stroke="#1e2422" stroke-width="0.02"/>
+<rect x="12.400" y="16.300" width="0.200" height="0.600" rx="0.000" fill="#888" stroke="#1e2422" stroke-width="0.02"/>
+<rect x="10.650" y="15.980" width="1.000" height="0.420" rx="0.120" fill="#ddd" stroke="#1e2422" stroke-width="0.03"/>
+<line x1="11.650" y1="16.190" x2="11.750" y2="16.550" stroke="#1e2422" stroke-width="0.04"/>
+<rect x="10.650" y="16.800" width="1" height="0.42" rx="0.12" fill="none" stroke="#5a605c" stroke-width="0.02" stroke-dasharray="0.08 0.06"/>
+<path d="M12.650 16.600 q0.6 0 0.6 -0.6 V15.400" fill="none" stroke="#c33" stroke-width="0.04"/>
+<path d="M12.650 16.680 q0.75 0 0.75 -0.7 V15.400" fill="none" stroke="#333" stroke-width="0.04"/>
+<rect x="12.950" y="14.850" width="0.600" height="0.500" rx="0.060" fill="#333" stroke="#1e2422" stroke-width="0.03"/>
+<text x="13.700" y="15.180" style="font-family:Helvetica, Arial, sans-serif;font-size:0.26px;font-weight:400;fill:#5a605c;text-anchor:start">2-pin plug</text>
+<text x="10.500" y="15.850" style="font-family:Helvetica, Arial, sans-serif;font-size:0.26px;font-weight:400;fill:#5a605c;text-anchor:end">float up = closed</text>
+<text x="10.500" y="17.500" style="font-family:Helvetica, Arial, sans-serif;font-size:0.26px;font-weight:400;fill:#5a605c;text-anchor:end">float down = open: pump stops</text>
+<line x1="2.300" y1="16.150" x2="12.100" y2="16.150" stroke="#2456a4" stroke-width="0.025" stroke-dasharray="0.15 0.1"/>
+<text x="2.000" y="16.250" style="font-family:Helvetica, Arial, sans-serif;font-size:0.28px;font-weight:400;fill:#2456a4;text-anchor:end">pump stops</text>
+<text x="2.000" y="16.600" style="font-family:Helvetica, Arial, sans-serif;font-size:0.26px;font-weight:400;fill:#5a605c;text-anchor:end">0.9 gal left</text>
+<circle cx="13.250" cy="14.300" r="0.28" fill="#2456a4"/>
+<text x="13.250" y="14.410" style="font-family:Helvetica, Arial, sans-serif;font-size:0.32px;font-weight:700;fill:#f8f7f3;text-anchor:middle">1</text>
+<rect x="16.300" y="12.600" width="9.800" height="5.900" rx="0.000" fill="#bfd6ec" stroke="none" stroke-width="0"/>
+<rect x="16.200" y="4.600" width="10.000" height="14.000" rx="0.300" fill="none" stroke="#1e2422" stroke-width="0.05"/>
+<rect x="23.950" y="4.000" width="2.250" height="0.600" rx="0.000" fill="#f8f7f3" stroke="#1e2422" stroke-width="0.05"/>
+<rect x="23.800" y="3.650" width="2.550" height="0.380" rx="0.080" fill="#e6cda3" stroke="#1e2422" stroke-width="0.05"/>
+<text x="21.200" y="19.850" style="font-family:Helvetica, Arial, sans-serif;font-size:0.4px;font-weight:700;fill:#1e2422;text-anchor:middle">Dirty jug, on the floor in the notch</text>
+<text x="16.000" y="18.650" style="font-family:Helvetica, Arial, sans-serif;font-size:0.26px;font-weight:400;fill:#5a605c;text-anchor:end">floor</text>
+<text x="16.300" y="19.050" style="font-family:Helvetica, Arial, sans-serif;font-size:0.26px;font-weight:400;fill:#5a605c;text-anchor:start">front</text>
+<text x="26.100" y="19.050" style="font-family:Helvetica, Arial, sans-serif;font-size:0.26px;font-weight:400;fill:#5a605c;text-anchor:end">back</text>
+<path d="M23.075 2.700 L27.075 2.700 L25.825 3.600 L25.825 5.000 L24.325 5.000 L24.325 3.600Z" fill="#2a2a2c" stroke="#1e2422" stroke-width="0.03"/>
+<text x="25.075" y="2.450" style="font-family:Helvetica, Arial, sans-serif;font-size:0.28px;font-weight:400;fill:#1e2422;text-anchor:middle">printed funnel, under the sink strainer</text>
+<rect x="25.750" y="6.280" width="0.350" height="0.640" rx="0.000" fill="#2a2a2c" stroke="#1e2422" stroke-width="0.02"/>
+<rect x="26.100" y="6.400" width="0.550" height="0.400" rx="0.000" fill="#555" stroke="#1e2422" stroke-width="0.02"/>
+<rect x="26.400" y="6.300" width="0.200" height="0.600" rx="0.000" fill="#888" stroke="#1e2422" stroke-width="0.02"/>
+<rect x="24.650" y="5.980" width="1.000" height="0.420" rx="0.120" fill="#ddd" stroke="#1e2422" stroke-width="0.03"/>
+<line x1="25.650" y1="6.190" x2="25.750" y2="6.550" stroke="#1e2422" stroke-width="0.04"/>
+<rect x="24.650" y="6.800" width="1" height="0.42" rx="0.12" fill="none" stroke="#5a605c" stroke-width="0.02" stroke-dasharray="0.08 0.06"/>
+<path d="M26.650 6.600 q0.6 0 0.6 -0.6 V5.400" fill="none" stroke="#c33" stroke-width="0.04"/>
+<path d="M26.650 6.680 q0.75 0 0.75 -0.7 V5.400" fill="none" stroke="#333" stroke-width="0.04"/>
+<rect x="26.950" y="4.850" width="0.600" height="0.500" rx="0.060" fill="#333" stroke="#1e2422" stroke-width="0.03"/>
+<text x="27.700" y="5.180" style="font-family:Helvetica, Arial, sans-serif;font-size:0.26px;font-weight:400;fill:#5a605c;text-anchor:start">2-pin plug</text>
+<text x="24.500" y="5.850" style="font-family:Helvetica, Arial, sans-serif;font-size:0.26px;font-weight:400;fill:#5a605c;text-anchor:end">float up = open: pump stops</text>
+<text x="24.500" y="7.500" style="font-family:Helvetica, Arial, sans-serif;font-size:0.26px;font-weight:400;fill:#5a605c;text-anchor:end">float down = closed</text>
+<line x1="16.300" y1="6.150" x2="26.100" y2="6.150" stroke="#2456a4" stroke-width="0.025" stroke-dasharray="0.15 0.1"/>
+<text x="16.000" y="6.250" style="font-family:Helvetica, Arial, sans-serif;font-size:0.28px;font-weight:400;fill:#2456a4;text-anchor:end">pump stops</text>
+<text x="16.000" y="6.600" style="font-family:Helvetica, Arial, sans-serif;font-size:0.26px;font-weight:400;fill:#5a605c;text-anchor:end">about 5 gal in</text>
+<circle cx="27.250" cy="4.300" r="0.28" fill="#2456a4"/>
+<text x="27.250" y="4.410" style="font-family:Helvetica, Arial, sans-serif;font-size:0.32px;font-weight:700;fill:#f8f7f3;text-anchor:middle">2</text>
+<text x="30.500" y="2.400" style="font-family:Helvetica, Arial, sans-serif;font-size:0.4px;font-weight:700;fill:#1e2422;text-anchor:start">A side-mount float, through the wall, 3×</text>
+<rect x="34.700" y="3.000" width="0.350" height="6.000" rx="0.000" fill="#c9dceb" stroke="#1e2422" stroke-width="0.03"/>
+<text x="34.500" y="9.500" style="font-family:Helvetica, Arial, sans-serif;font-size:0.3px;font-weight:400;fill:#5a605c;text-anchor:end">inside</text>
+<text x="35.250" y="9.500" style="font-family:Helvetica, Arial, sans-serif;font-size:0.3px;font-weight:400;fill:#5a605c;text-anchor:start">outside</text>
+<rect x="33.800" y="5.100" width="0.900" height="1.800" rx="0.000" fill="#2a2a2c" stroke="#1e2422" stroke-width="0.03"/>
+<rect x="34.620" y="5.050" width="0.080" height="1.900" rx="0.000" fill="#444" stroke="#1e2422" stroke-width="0.02"/>
+<rect x="34.700" y="5.450" width="1.900" height="1.100" rx="0.000" fill="#555" stroke="#1e2422" stroke-width="0.03"/>
+<line x1="35.100" y1="5.450" x2="35.250" y2="6.550" stroke="#999" stroke-width="0.02"/>
+<line x1="35.320" y1="5.450" x2="35.470" y2="6.550" stroke="#999" stroke-width="0.02"/>
+<line x1="35.540" y1="5.450" x2="35.690" y2="6.550" stroke="#999" stroke-width="0.02"/>
+<line x1="35.760" y1="5.450" x2="35.910" y2="6.550" stroke="#999" stroke-width="0.02"/>
+<line x1="35.980" y1="5.450" x2="36.130" y2="6.550" stroke="#999" stroke-width="0.02"/>
+<line x1="36.200" y1="5.450" x2="36.350" y2="6.550" stroke="#999" stroke-width="0.02"/>
+<line x1="36.420" y1="5.450" x2="36.570" y2="6.550" stroke="#999" stroke-width="0.02"/>
+<rect x="35.100" y="5.150" width="0.600" height="1.700" rx="0.000" fill="#888" stroke="#1e2422" stroke-width="0.03"/>
+<line x1="33.800" y1="5.700" x2="32.300" y2="4.400" stroke="#1e2422" stroke-width="0.08"/>
+<rect x="30.700" y="3.600" width="1.800" height="1.100" rx="0.250" fill="#ddd" stroke="#1e2422" stroke-width="0.04"/>
+<path d="M36.600 5.880 H39.200" stroke="#c33" stroke-width="0.07" fill="none"/>
+<path d="M36.600 6.120 H39.200" stroke="#333" stroke-width="0.07" fill="none"/>
+<text x="34.200" y="7.350" style="font-family:Helvetica, Arial, sans-serif;font-size:0.28px;font-weight:400;fill:#5a605c;text-anchor:end">flange + gasket</text>
+<text x="35.400" y="7.350" style="font-family:Helvetica, Arial, sans-serif;font-size:0.28px;font-weight:400;fill:#5a605c;text-anchor:start">nut</text>
+<text x="37.300" y="5.650" style="font-family:Helvetica, Arial, sans-serif;font-size:0.28px;font-weight:400;fill:#5a605c;text-anchor:start">two wires</text>
+<text x="31.600" y="3.350" style="font-family:Helvetica, Arial, sans-serif;font-size:0.28px;font-weight:400;fill:#2456a4;text-anchor:middle">float on a hinged arm</text>
+<text x="30.500" y="10.400" style="font-family:Helvetica, Arial, sans-serif;font-size:0.3px;font-weight:400;fill:#1e2422;text-anchor:start">5/8 in hole. Goes in from inside: lower it through the</text>
+<text x="30.500" y="10.850" style="font-family:Helvetica, Arial, sans-serif;font-size:0.3px;font-weight:400;fill:#1e2422;text-anchor:start">neck on its lead, fish the lead out the hole, pull the</text>
+<text x="30.500" y="11.300" style="font-family:Helvetica, Arial, sans-serif;font-size:0.3px;font-weight:400;fill:#1e2422;text-anchor:start">thread through, nut on outside. Flip the float on its</text>
+<text x="30.500" y="11.750" style="font-family:Helvetica, Arial, sans-serif;font-size:0.3px;font-weight:400;fill:#1e2422;text-anchor:start">arm to swap open-on-empty and open-on-full.</text>
+<text x="30.500" y="13.400" style="font-family:Helvetica, Arial, sans-serif;font-size:0.4px;font-weight:700;fill:#1e2422;text-anchor:start">In order</text>
+<circle cx="30.800" cy="14.150" r="0.28" fill="#2456a4"/>
+<text x="30.800" y="14.260" style="font-family:Helvetica, Arial, sans-serif;font-size:0.32px;font-weight:700;fill:#f8f7f3;text-anchor:middle">1</text>
+<text x="31.300" y="14.250" style="font-family:Helvetica, Arial, sans-serif;font-size:0.3px;font-weight:400;fill:#1e2422;text-anchor:start">Clean jug: 5/8 in hole in the back wall 2 in up;</text>
+<text x="31.300" y="14.670" style="font-family:Helvetica, Arial, sans-serif;font-size:0.3px;font-weight:400;fill:#1e2422;text-anchor:start">float in, set closed with the float up.</text>
+<circle cx="30.800" cy="15.540" r="0.28" fill="#2456a4"/>
+<text x="30.800" y="15.650" style="font-family:Helvetica, Arial, sans-serif;font-size:0.32px;font-weight:700;fill:#f8f7f3;text-anchor:middle">2</text>
+<text x="31.300" y="15.640" style="font-family:Helvetica, Arial, sans-serif;font-size:0.3px;font-weight:400;fill:#1e2422;text-anchor:start">Dirty jug: 5/8 in hole in the back wall 12 in up;</text>
+<text x="31.300" y="16.060" style="font-family:Helvetica, Arial, sans-serif;font-size:0.3px;font-weight:400;fill:#1e2422;text-anchor:start">float in, set closed with the float down.</text>
+<circle cx="30.800" cy="16.930" r="0.28" fill="#2456a4"/>
+<text x="30.800" y="17.040" style="font-family:Helvetica, Arial, sans-serif;font-size:0.32px;font-weight:700;fill:#f8f7f3;text-anchor:middle">3</text>
+<text x="31.300" y="17.030" style="font-family:Helvetica, Arial, sans-serif;font-size:0.3px;font-weight:400;fill:#1e2422;text-anchor:start">A 2-pin pigtail on each lead, lever connectors, a foot of slack. Meter both:</text>
+<text x="31.300" y="17.450" style="font-family:Helvetica, Arial, sans-serif;font-size:0.3px;font-weight:400;fill:#1e2422;text-anchor:start">closed in normal use. They go in series on the relay.</text>
+<circle cx="30.800" cy="18.320" r="0.28" fill="#2456a4"/>
+<text x="30.800" y="18.430" style="font-family:Helvetica, Arial, sans-serif;font-size:0.32px;font-weight:700;fill:#f8f7f3;text-anchor:middle">4</text>
+<text x="31.300" y="18.420" style="font-family:Helvetica, Arial, sans-serif;font-size:0.3px;font-weight:400;fill:#1e2422;text-anchor:start">Clean jug cap: two 5/8 in holes, pickup tube and</text>
+<text x="31.300" y="18.840" style="font-family:Helvetica, Arial, sans-serif;font-size:0.3px;font-weight:400;fill:#1e2422;text-anchor:start">fill tube. Foot on the tube end, down to the floor.</text>
+<circle cx="30.800" cy="19.710" r="0.28" fill="#2456a4"/>
+<text x="30.800" y="19.820" style="font-family:Helvetica, Arial, sans-serif;font-size:0.32px;font-weight:700;fill:#f8f7f3;text-anchor:middle">5</text>
+<text x="31.300" y="19.810" style="font-family:Helvetica, Arial, sans-serif;font-size:0.3px;font-weight:400;fill:#1e2422;text-anchor:start">Dirty jug cap: 1 1/2 in hole, printed funnel in.</text>
+<circle cx="10.400" cy="3.850" r="0.28" fill="#2456a4"/>
+<text x="10.400" y="3.960" style="font-family:Helvetica, Arial, sans-serif;font-size:0.32px;font-weight:700;fill:#f8f7f3;text-anchor:middle">4</text>
+<circle cx="27.475" cy="3.200" r="0.28" fill="#2456a4"/>
+<text x="27.475" y="3.310" style="font-family:Helvetica, Arial, sans-serif;font-size:0.32px;font-weight:700;fill:#f8f7f3;text-anchor:middle">5</text></svg>

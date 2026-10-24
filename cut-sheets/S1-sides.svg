@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- S1 Sides. Units: inches, 1:1, sheet 48 x 48. Cut with a 1/4 in downcut bit (see gen_c2d.py). Parts sit 0.5 in apart. -->
+<!-- Layers: outside profiles = Cutout, outside the line, through. inside profiles = Contour inside the line, through. -->
+<!-- holes = 0.5 in, Contour inside the line with the 1/4 in bit, through. dados = Pocket, 0.25 in deep, inside the outline. -->
+<!-- 1 in all round is never cut by a part: hold-down screws go there. Red break lines are on-path through cuts to the edge; cut them LAST with a screw in each leftover. -->
+<svg xmlns="http://www.w3.org/2000/svg" width="48in" height="48in" viewBox="0 0 48 48">
+  <g id="sheet-outline" fill="none" stroke="#999999" stroke-width="0.02">
+    <rect x="0" y="0" width="48" height="48"/>
+  </g>
+  <g id="hold-down-zones-delete-before-cutting" fill="#dddddd" stroke="none">
+    <path fill-rule="evenodd" d="M0 0H48V48H0Z M1 1H47V47H1Z"/>
+  </g>
+  <g id="dados-pocket-0.25in-deep" fill="none" stroke="#0000ff" stroke-width="0.01">
+    <path d="M1.375 45.78H18.905V46.64H1.375V45.78Z"/>
+    <path d="M1.375 23.5H18.905V24.235H1.375V23.5Z"/>
+    <path d="M10.875 12.25H18.905V12.985H10.875V12.25Z"/>
+    <path d="M10.875 1.375H18.905V2.235H10.875V1.375Z"/>
+    <path d="M20.595 45.78H38.125V46.64H20.595V45.78Z"/>
+    <path d="M20.595 23.5H38.125V24.235H20.595V23.5Z"/>
+    <path d="M20.595 12.25H28.625V12.985H20.595V12.25Z"/>
+    <path d="M20.595 1.375H28.625V2.235H20.595V1.375Z"/>
+    <path d="M20.595 36.75H36.75A0.25 0.25 0 0 1 37 37V37.235A0.25 0.25 0 0 1 36.75 37.485H20.595V36.75Z"/>
+  </g>
+  <g id="recesses-and-dimples-pocket-0.055in-deep" fill="none" stroke="#00aaaa" stroke-width="0.01">
+    <path d="M1.375 42.3563H2.03A0.25 0.25 0 0 1 2.28 42.6063V44.7662A0.25 0.25 0 0 1 2.03 45.0162H1.375V42.3563Z"/>
+    <path d="M1.375 24.9837H2.03A0.25 0.25 0 0 1 2.28 25.2337V27.3937A0.25 0.25 0 0 1 2.03 27.6437H1.375V24.9837Z"/>
+    <path d="M37.47 33.3263H38.125V35.9862H37.47A0.25 0.25 0 0 1 37.22 35.7362V33.5763A0.25 0.25 0 0 1 37.47 33.3263Z"/>
+    <path d="M37.47 24.9837H38.125V27.6437H37.47A0.25 0.25 0 0 1 37.22 27.3937V25.2337A0.25 0.25 0 0 1 37.47 24.9837Z"/>
+    <path d="M37.47 42.3563H38.125V45.0162H37.47A0.25 0.25 0 0 1 37.22 44.7662V42.6063A0.25 0.25 0 0 1 37.47 42.3563Z"/>
+    <path d="M37.47 38.2338H38.125V40.8937H37.47A0.25 0.25 0 0 1 37.22 40.6437V38.4838A0.25 0.25 0 0 1 37.47 38.2338Z"/>
+  </g>
+  <g id="holes-drill-0.5in-through" fill="none" stroke="#ff00ff" stroke-width="0.01">
+    <circle cx="12.5" cy="19.5" r="0.25"/>
+    <circle cx="16.5" cy="19.5" r="0.25"/>
+  </g>
+  <g id="outside-profiles-cutout-through" fill="none" stroke="#000000" stroke-width="0.01">
+    <path d="M11 1.5H19.5V46.5H1.5V23.5H11Z"/>
+    <path d="M20 1.5H28.5V23.5H38V46.5H20Z"/>
+  </g>
+  <g id="break-lines-on-path-through-cut-last" fill="none" stroke="#ff0000" stroke-width="0.01">
+    <line x1="38.75" y1="0" x2="38.75" y2="48"/>
+    <line x1="0" y1="47.25" x2="48" y2="47.25"/>
+  </g>
+  <g id="labels-delete-before-cutting" fill="#888888" font-family="Helvetica, Arial, sans-serif" font-size="0.6">
+    <text x="2" y="24.6">SIDE L  18 × 45</text>
+    <text x="20.5" y="24.6">SIDE R  18 × 45</text>
+    <text x="24" y="47.7" text-anchor="middle">1 IN HOLD-DOWN BORDER ALL ROUND, SCREWS HERE, NO PARTS</text>
+  </g>
+</svg>

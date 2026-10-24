@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- S4 Dividers, mid shelves, upper dividers. Units: inches, 1:1, sheet 48 x 48. Cut with a 1/4 in downcut bit (see gen_c2d.py). Parts sit 0.5 in apart. -->
+<!-- Layers: outside profiles = Cutout, outside the line, through. inside profiles = Contour inside the line, through. -->
+<!-- holes = 0.5 in, Contour inside the line with the 1/4 in bit, through. dados = Pocket, 0.25 in deep, inside the outline. -->
+<!-- 1 in all round is never cut by a part: hold-down screws go there. Red break lines are on-path through cuts to the edge; cut them LAST with a screw in each leftover. -->
+<svg xmlns="http://www.w3.org/2000/svg" width="48in" height="48in" viewBox="0 0 48 48">
+  <g id="sheet-outline" fill="none" stroke="#999999" stroke-width="0.02">
+    <rect x="0" y="0" width="48" height="48"/>
+  </g>
+  <g id="hold-down-zones-delete-before-cutting" fill="#dddddd" stroke="none">
+    <path fill-rule="evenodd" d="M0 0H48V48H0Z M1 1H47V47H1Z"/>
+  </g>
+  <g id="dados-pocket-0.25in-deep" fill="none" stroke="#0000ff" stroke-width="0.01">
+    <path d="M19.155 13.015H35.31A0.25 0.25 0 0 1 35.56 13.265V13.5A0.25 0.25 0 0 1 35.31 13.75H19.155V13.015Z"/>
+  </g>
+  <g id="recesses-and-dimples-pocket-0.055in-deep" fill="none" stroke="#00aaaa" stroke-width="0.01">
+    <path d="M18.25 19.8863H18.905V22.5463H18.25A0.25 0.25 0 0 1 18 22.2963V20.1363A0.25 0.25 0 0 1 18.25 19.8863Z"/>
+    <path d="M18.25 2.5137H18.905V5.1737H18.25A0.25 0.25 0 0 1 18 4.9237V2.7637A0.25 0.25 0 0 1 18.25 2.5137Z"/>
+    <path d="M36.03 19.8863H36.685V22.5463H36.03A0.25 0.25 0 0 1 35.78 22.2963V20.1363A0.25 0.25 0 0 1 36.03 19.8863Z"/>
+    <path d="M36.03 2.5137H36.685V5.1737H36.03A0.25 0.25 0 0 1 35.78 4.9237V2.7637A0.25 0.25 0 0 1 36.03 2.5137Z"/>
+  </g>
+  <g id="outside-profiles-cutout-through" fill="none" stroke="#000000" stroke-width="0.01">
+    <path d="M1.5 1.5H18.78V23.56H1.5V1.5Z"/>
+    <path d="M19.28 1.5H36.56V23.56H19.28V1.5Z"/>
+    <path d="M37.31 1.5H45.56A0.25 0.25 0 0 1 45.81 1.75V17.78H37.06V1.75A0.25 0.25 0 0 1 37.31 1.5Z"/>
+    <path d="M1.75 24.06H13A0.25 0.25 0 0 1 13.25 24.31V40.34H1.5V24.31A0.25 0.25 0 0 1 1.75 24.06Z"/>
+    <path d="M13.75 24.06H21.53V34.59H13.75V24.06Z"/>
+    <path d="M22.03 24.06H29.81V34.59H22.03V24.06Z"/>
+    <path d="M30.31 24.06H38.09V34.59H30.31V24.06Z"/>
+  </g>
+  <g id="break-lines-on-path-through-cut-last" fill="none" stroke="#ff0000" stroke-width="0.01">
+    <line x1="46.56" y1="0" x2="46.56" y2="48"/>
+    <line x1="0" y1="41.09" x2="48" y2="41.09"/>
+  </g>
+  <g id="labels-delete-before-cutting" fill="#888888" font-family="Helvetica, Arial, sans-serif" font-size="0.6">
+    <text x="2" y="2.6">DIVIDER A  17 9/32 × 22 1/16  LEFT FACE UP</text>
+    <text x="19.78" y="2.6">DIVIDER B  17 9/32 × 22 1/16  LEFT FACE UP</text>
+    <text x="37.56" y="2.6">DRY SHELF  8 3/4 × 16 9/32</text>
+    <text x="2" y="25.16">OVEN FLOOR  11 3/4 × 16 9/32</text>
+    <text x="14.25" y="25.16">UPPER DIV 2  7 25/32 × 10 17/32</text>
+    <text x="22.53" y="25.16">UPPER DIV 1  7 25/32 × 10 17/32</text>
+    <text x="30.81" y="25.16">UPPER DIV 3  7 25/32 × 10 17/32</text>
+    <text x="24" y="47.7" text-anchor="middle">1 IN HOLD-DOWN BORDER ALL ROUND, SCREWS HERE, NO PARTS</text>
+  </g>
+</svg>
